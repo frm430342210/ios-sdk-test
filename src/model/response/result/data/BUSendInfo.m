@@ -7,7 +7,7 @@
 //
 
 #import "BUSendInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BUSendInfo
 + (NSDictionary *)modelCustomPropertyMapper {

@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenGetBalanceResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenGetBalanceResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

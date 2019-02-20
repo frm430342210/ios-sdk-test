@@ -26,7 +26,7 @@
 #import "Http.h"
 #import "SDKError.h"
 #import "SDKException.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenServiceImpl
 /**
@@ -382,7 +382,7 @@
         [ctp10TokenCheckValidResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenCheckValidResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenCheckValidResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenCheckValidResult)];
+        [ctp10TokenCheckValidResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenCheckValidResult)];
     }
     return ctp10TokenCheckValidResponse;
 }
@@ -436,10 +436,10 @@
         [ctp10TokenAllowanceResponse buildResponse: SUCCESS : ctp10TokenAllowanceResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenAllowanceResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenAllowanceResult)];
+        [ctp10TokenAllowanceResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : (ctp10TokenAllowanceResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenAllowanceResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenAllowanceResult)];
+        [ctp10TokenAllowanceResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenAllowanceResult)];
     }
     return ctp10TokenAllowanceResponse;
 }
@@ -484,10 +484,10 @@
         [ctp10TokenGetInfoResponse buildResponse: SUCCESS : ctp10TokenGetInfoResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenGetInfoResult)];
+        [ctp10TokenGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : (ctp10TokenGetInfoResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenGetInfoResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenGetInfoResult)];
+        [ctp10TokenGetInfoResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenGetInfoResult)];
     }
     return ctp10TokenGetInfoResponse;
 }
@@ -527,10 +527,10 @@
         [ctp10TokenGetNameResponse buildResponse: SUCCESS : ctp10TokenGetNameResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenGetNameResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenGetNameResult)];
+        [ctp10TokenGetNameResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(ctp10TokenGetNameResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenGetNameResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenGetNameResult)];
+        [ctp10TokenGetNameResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenGetNameResult)];
     }
     return ctp10TokenGetNameResponse;
 }
@@ -570,10 +570,10 @@
         [ctp10TokenGetSymbolResponse buildResponse: SUCCESS : ctp10TokenGetSymbolResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenGetSymbolResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenGetSymbolResult)];
+        [ctp10TokenGetSymbolResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(ctp10TokenGetSymbolResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenGetSymbolResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenGetSymbolResult)];
+        [ctp10TokenGetSymbolResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenGetSymbolResult)];
     }
     return ctp10TokenGetSymbolResponse;
 }
@@ -613,10 +613,10 @@
         [ctp10TokenGetDecimalsResponse buildResponse: SUCCESS : ctp10TokenGetDecimalsResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenGetDecimalsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenGetDecimalsResult)];
+        [ctp10TokenGetDecimalsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(ctp10TokenGetDecimalsResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenGetDecimalsResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenGetDecimalsResult)];
+        [ctp10TokenGetDecimalsResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenGetDecimalsResult)];
     }
     return ctp10TokenGetDecimalsResponse;
 }
@@ -656,10 +656,10 @@
         [ctp10TokenGetTotalSupplyResponse buildResponse: SUCCESS : ctp10TokenGetTotalSupplyResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenGetTotalSupplyResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenGetTotalSupplyResult)];
+        [ctp10TokenGetTotalSupplyResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(ctp10TokenGetTotalSupplyResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenGetTotalSupplyResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenGetTotalSupplyResult)];
+        [ctp10TokenGetTotalSupplyResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenGetTotalSupplyResult)];
     }
     
     return ctp10TokenGetTotalSupplyResponse;
@@ -707,10 +707,10 @@
         [ctp10TokenGetBalanceResponse buildResponse: SUCCESS : ctp10TokenGetBalanceResult];
     }
     @catch(SDKException *sdkException) {
-        [ctp10TokenGetBalanceResponse buildResponse: ([sdkException getErrorCode]) :(ctp10TokenGetBalanceResult)];
+        [ctp10TokenGetBalanceResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(ctp10TokenGetBalanceResult)];
     }
     @catch(NSException *exception) {
-        [ctp10TokenGetBalanceResponse buildResponse: (SYSTEM_ERROR) :(ctp10TokenGetBalanceResult)];
+        [ctp10TokenGetBalanceResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(ctp10TokenGetBalanceResult)];
     }
     return ctp10TokenGetBalanceResponse;
 }

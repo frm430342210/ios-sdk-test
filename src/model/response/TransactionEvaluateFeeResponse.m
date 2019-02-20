@@ -7,7 +7,7 @@
 //
 
 #import "TransactionEvaluateFeeResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionEvaluateFeeResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

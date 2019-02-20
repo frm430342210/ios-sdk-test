@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Type encoding's type.
  */
-typedef NS_OPTIONS(NSUInteger, YYEncodingType) {
+typedef NS_OPTIONS(NSUInteger, YYModleEncodingType) {
     YYEncodingTypeMask       = 0xFF, ///< mask of type value
     YYEncodingTypeUnknown    = 0, ///< unknown
     YYEncodingTypeVoid       = 1, ///< void
@@ -73,18 +73,18 @@ typedef NS_OPTIONS(NSUInteger, YYEncodingType) {
  @param typeEncoding  A Type-Encoding string.
  @return The encoding type.
  */
-YYEncodingType YYEncodingGetType(const char *typeEncoding);
+YYModleEncodingType YYEncodingGetType(const char *typeEncoding);
 
 
 /**
  Instance variable information.
  */
-@interface YYClassIvarInfo : NSObject
+@interface YYModelClassIvarInfo : NSObject
 @property (nonatomic, assign, readonly) Ivar ivar;              ///< ivar opaque struct
 @property (nonatomic, strong, readonly) NSString *name;         ///< Ivar's name
 @property (nonatomic, assign, readonly) ptrdiff_t offset;       ///< Ivar's offset
 @property (nonatomic, strong, readonly) NSString *typeEncoding; ///< Ivar's type encoding
-@property (nonatomic, assign, readonly) YYEncodingType type;    ///< Ivar's type
+@property (nonatomic, assign, readonly) YYModleEncodingType type;    ///< Ivar's type
 
 /**
  Creates and returns an ivar info object.
@@ -99,7 +99,7 @@ YYEncodingType YYEncodingGetType(const char *typeEncoding);
 /**
  Method information.
  */
-@interface YYClassMethodInfo : NSObject
+@interface YYModelClassMethodInfo : NSObject
 @property (nonatomic, assign, readonly) Method method;                  ///< method opaque struct
 @property (nonatomic, strong, readonly) NSString *name;                 ///< method name
 @property (nonatomic, assign, readonly) SEL sel;                        ///< method's selector
@@ -121,10 +121,10 @@ YYEncodingType YYEncodingGetType(const char *typeEncoding);
 /**
  Property information.
  */
-@interface YYClassPropertyInfo : NSObject
+@interface YYModelClassPropertyInfo : NSObject
 @property (nonatomic, assign, readonly) objc_property_t property; ///< property's opaque struct
 @property (nonatomic, strong, readonly) NSString *name;           ///< property's name
-@property (nonatomic, assign, readonly) YYEncodingType type;      ///< property's type
+@property (nonatomic, assign, readonly) YYModleEncodingType type;      ///< property's type
 @property (nonatomic, strong, readonly) NSString *typeEncoding;   ///< property's encoding value
 @property (nonatomic, strong, readonly) NSString *ivarName;       ///< property's ivar name
 @property (nullable, nonatomic, assign, readonly) Class cls;      ///< may be nil
@@ -145,16 +145,16 @@ YYEncodingType YYEncodingGetType(const char *typeEncoding);
 /**
  Class information for a class.
  */
-@interface YYClassInfo : NSObject
+@interface YYModelClassInfo : NSObject
 @property (nonatomic, assign, readonly) Class cls; ///< class object
 @property (nullable, nonatomic, assign, readonly) Class superCls; ///< super class object
 @property (nullable, nonatomic, assign, readonly) Class metaCls;  ///< class's meta class object
 @property (nonatomic, readonly) BOOL isMeta; ///< whether this class is meta class
 @property (nonatomic, strong, readonly) NSString *name; ///< class name
-@property (nullable, nonatomic, strong, readonly) YYClassInfo *superClassInfo; ///< super class's class info
-@property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, YYClassIvarInfo *> *ivarInfos; ///< ivars
-@property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, YYClassMethodInfo *> *methodInfos; ///< methods
-@property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, YYClassPropertyInfo *> *propertyInfos; ///< properties
+@property (nullable, nonatomic, strong, readonly) YYModelClassInfo *superClassInfo; ///< super class's class info
+@property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, YYModelClassIvarInfo *> *ivarInfos; ///< ivars
+@property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, YYModelClassMethodInfo *> *methodInfos; ///< methods
+@property (nullable, nonatomic, strong, readonly) NSDictionary<NSString *, YYModelClassPropertyInfo *> *propertyInfos; ///< properties
 
 /**
  If the class is changed (for example: you add a method to this class with

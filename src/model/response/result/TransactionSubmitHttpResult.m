@@ -7,7 +7,7 @@
 //
 
 #import "TransactionSubmitHttpResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionSubmitHttpResult
 + (NSDictionary *)modelCustomPropertyMapper {

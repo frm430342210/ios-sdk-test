@@ -7,7 +7,7 @@
 //
 
 #import "AccountGetNonceResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 
 @implementation AccountGetNonceResponse

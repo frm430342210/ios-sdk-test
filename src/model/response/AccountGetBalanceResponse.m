@@ -7,7 +7,7 @@
 //
 
 #import "AccountGetBalanceResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountGetBalanceResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

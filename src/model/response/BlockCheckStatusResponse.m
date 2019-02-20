@@ -7,7 +7,7 @@
 //
 
 #import "BlockCheckStatusResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockCheckStatusResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

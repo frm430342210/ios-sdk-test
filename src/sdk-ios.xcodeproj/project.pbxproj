@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58064A9F21AD17A400A36E73 /* SDKConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 58064A9D21AD17A400A36E73 /* SDKConfigure.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58064AA021AD17A400A36E73 /* SDKConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 58064A9E21AD17A400A36E73 /* SDKConfigure.m */; };
+		58064AA721AD23C000A36E73 /* Chain.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 58064AA521AD23BF00A36E73 /* Chain.pbobjc.h */; };
+		58064AA821AD23C000A36E73 /* Chain.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 58064AA621AD23BF00A36E73 /* Chain.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		580849232120863800E6A98C /* BUSendOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 580849212120863800E6A98C /* BUSendOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		580849242120863800E6A98C /* BUSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 580849222120863800E6A98C /* BUSendOperation.m */; };
 		58084927212086E600E6A98C /* BuServiceImpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 58084925212086E600E6A98C /* BuServiceImpl.h */; };
@@ -303,8 +307,6 @@
 		584AAA5021255E34009F6199 /* BlockRewardJsonResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 584AAA4E21255E34009F6199 /* BlockRewardJsonResult.h */; };
 		584AAA5121255E34009F6199 /* BlockRewardJsonResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 584AAA4F21255E34009F6199 /* BlockRewardJsonResult.m */; };
 		584AAA6B2125770E009F6199 /* sdk_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 584AAA692125770E009F6199 /* sdk_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		584D112A21773C9B00D58D74 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 584D112821773C9A00D58D74 /* libcrypto.a */; };
-		584D112B21773C9B00D58D74 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 584D112921773C9B00D58D74 /* libssl.a */; };
 		584D117721773D1300D58D74 /* whrlpool.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D112C21773CE800D58D74 /* whrlpool.h */; };
 		584D117821773D1300D58D74 /* idea.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D112D21773CE900D58D74 /* idea.h */; };
 		584D117921773D1300D58D74 /* engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D112E21773CE900D58D74 /* engine.h */; };
@@ -386,7 +388,6 @@
 		584D11CA21774F8100D58D74 /* Mnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D11C821774F8100D58D74 /* Mnemonic.m */; };
 		584D11CE217751A500D58D74 /* Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D11CC217751A500D58D74 /* Hash.m */; };
 		584D11CF217751A500D58D74 /* Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D11CD217751A500D58D74 /* Hash.h */; };
-		584D11D12177606200D58D74 /* english.txt in Resources */ = {isa = PBXBuildFile; fileRef = 584D11D02177606100D58D74 /* english.txt */; };
 		584D11D421781EAA00D58D74 /* BUChainKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D11D221781EAA00D58D74 /* BUChainKey.h */; };
 		584D11D521781EAA00D58D74 /* BUChainKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D11D321781EAA00D58D74 /* BUChainKey.m */; };
 		584D11DA21782E3600D58D74 /* Base58.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D11D821782E3500D58D74 /* Base58.h */; };
@@ -408,13 +409,13 @@
 		584D11FD217869D400D58D74 /* crypto_scrypt-hexconvert.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D11EE217869D200D58D74 /* crypto_scrypt-hexconvert.h */; };
 		584D11FE217869D400D58D74 /* b64.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D11EF217869D300D58D74 /* b64.h */; };
 		584D11FF217869D400D58D74 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 584D11F0217869D300D58D74 /* main.c */; };
-		584D120221786E6100D58D74 /* KeyStoreValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D120021786E6100D58D74 /* KeyStoreValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		584D120321786E6100D58D74 /* KeyStoreValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D120121786E6100D58D74 /* KeyStoreValue.m */; };
-		584D120621786E9F00D58D74 /* ScryptParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D120421786E9E00D58D74 /* ScryptParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		584D120721786E9F00D58D74 /* ScryptParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D120521786E9E00D58D74 /* ScryptParams.m */; };
+		584D120621786E9F00D58D74 /* ScryptParamsEty.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D120421786E9E00D58D74 /* ScryptParamsEty.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		584D120721786E9F00D58D74 /* ScryptParamsEty.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D120521786E9E00D58D74 /* ScryptParamsEty.m */; };
 		584D120921787C8F00D58D74 /* slowequals.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D120821787C8F00D58D74 /* slowequals.h */; };
 		584D12182178989600D58D74 /* Keypair.h in Headers */ = {isa = PBXBuildFile; fileRef = 584D12162178989500D58D74 /* Keypair.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		584D12192178989600D58D74 /* Keypair.m in Sources */ = {isa = PBXBuildFile; fileRef = 584D12172178989600D58D74 /* Keypair.m */; };
+		58832C812179BA7500F69BC3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58832C7F2179BA7300F69BC3 /* libcrypto.a */; };
+		58832C822179BA7500F69BC3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58832C802179BA7400F69BC3 /* libssl.a */; };
 		5899801E211B12AB00E4C9C2 /* ed25519-donna-impl-base.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998003211B12A900E4C9C2 /* ed25519-donna-impl-base.h */; };
 		5899801F211B12AB00E4C9C2 /* ed25519-donna-64bit-x86-32bit.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998004211B12A900E4C9C2 /* ed25519-donna-64bit-x86-32bit.h */; };
 		58998020211B12AB00E4C9C2 /* ed25519-donna.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998005211B12A900E4C9C2 /* ed25519-donna.h */; };
@@ -569,11 +570,11 @@
 		58998206211B18B100E4C9C2 /* TransactionServiceImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998201211B18B100E4C9C2 /* TransactionServiceImpl.m */; };
 		58998209211B375C00E4C9C2 /* SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998207211B375C00E4C9C2 /* SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5899820A211B375C00E4C9C2 /* SDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998208211B375C00E4C9C2 /* SDK.m */; };
-		58998229211C2C7400E4C9C2 /* YYClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998224211C2C7400E4C9C2 /* YYClassInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5899822A211C2C7400E4C9C2 /* YYModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998225211C2C7400E4C9C2 /* YYModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5899822B211C2C7400E4C9C2 /* NSObject+YYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998226211C2C7400E4C9C2 /* NSObject+YYModel.m */; };
-		5899822C211C2C7400E4C9C2 /* YYClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998227211C2C7400E4C9C2 /* YYClassInfo.m */; };
-		5899822D211C2C7400E4C9C2 /* NSObject+YYModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998228211C2C7400E4C9C2 /* NSObject+YYModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58998229211C2C7400E4C9C2 /* YYModelClassInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998224211C2C7400E4C9C2 /* YYModelClassInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5899822A211C2C7400E4C9C2 /* YYModelClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998225211C2C7400E4C9C2 /* YYModelClass.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5899822B211C2C7400E4C9C2 /* NSObject+YYModelClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998226211C2C7400E4C9C2 /* NSObject+YYModelClass.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5899822C211C2C7400E4C9C2 /* YYModelClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998227211C2C7400E4C9C2 /* YYModelClassInfo.m */; };
+		5899822D211C2C7400E4C9C2 /* NSObject+YYModelClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998228211C2C7400E4C9C2 /* NSObject+YYModelClass.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58998396211D57A000E4C9C2 /* GPBCodedOutputStream_PackagePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5899834C211D57A000E4C9C2 /* GPBCodedOutputStream_PackagePrivate.h */; };
 		58998397211D57A000E4C9C2 /* GPBArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 5899834D211D57A000E4C9C2 /* GPBArray.h */; };
 		58998398211D57A000E4C9C2 /* GPBExtensionRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5899834E211D57A000E4C9C2 /* GPBExtensionRegistry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -600,7 +601,6 @@
 		589983AD211D57A000E4C9C2 /* GPBUtilities_PackagePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998365211D57A000E4C9C2 /* GPBUtilities_PackagePrivate.h */; };
 		589983AE211D57A000E4C9C2 /* GPBCodedInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998366211D57A000E4C9C2 /* GPBCodedInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		589983AF211D57A000E4C9C2 /* Wrappers.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998367211D57A000E4C9C2 /* Wrappers.pbobjc.h */; };
-		589983B0211D57A000E4C9C2 /* Chain.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998368211D57A000E4C9C2 /* Chain.pbobjc.h */; };
 		589983B1211D57A000E4C9C2 /* Struct.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998369211D57A000E4C9C2 /* Struct.pbobjc.h */; };
 		589983B2211D57A000E4C9C2 /* FieldMask.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5899836A211D57A000E4C9C2 /* FieldMask.pbobjc.h */; };
 		589983B3211D57A000E4C9C2 /* GPBWellKnownTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5899836B211D57A000E4C9C2 /* GPBWellKnownTypes.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -645,7 +645,6 @@
 		589983DA211D57A100E4C9C2 /* FieldMask.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998392211D57A000E4C9C2 /* FieldMask.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		589983DB211D57A100E4C9C2 /* Struct.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998393211D57A000E4C9C2 /* Struct.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		589983DC211D57A100E4C9C2 /* GPBDictionary_PackagePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998394211D57A000E4C9C2 /* GPBDictionary_PackagePrivate.h */; };
-		589983DD211D57A100E4C9C2 /* Chain.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998395211D57A000E4C9C2 /* Chain.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		58998449211D796A00E4C9C2 /* AssetServiceProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998447211D796A00E4C9C2 /* AssetServiceProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5899844D211D79AB00E4C9C2 /* AssetService.h in Headers */ = {isa = PBXBuildFile; fileRef = 5899844B211D79AB00E4C9C2 /* AssetService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5899844E211D79AB00E4C9C2 /* AssetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5899844C211D79AB00E4C9C2 /* AssetService.m */; };
@@ -661,9 +660,19 @@
 		58998463211D809900E4C9C2 /* AssetIssueOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998461211D809900E4C9C2 /* AssetIssueOperation.m */; };
 		58998466211D823A00E4C9C2 /* AssetSendOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 58998464211D823A00E4C9C2 /* AssetSendOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58998467211D823A00E4C9C2 /* AssetSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58998465211D823A00E4C9C2 /* AssetSendOperation.m */; };
+		589E1E6E2189A8C2009C68B7 /* TransactionTestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 589E1E6C2189A8C2009C68B7 /* TransactionTestRequest.m */; };
+		589E1E6F2189A8C2009C68B7 /* TransactionTestRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 589E1E6D2189A8C2009C68B7 /* TransactionTestRequest.h */; };
+		58CBD60D21882B0000A4C97D /* TransactionItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 58CBD60B21882B0000A4C97D /* TransactionItem.h */; };
+		58CBD60E21882B0000A4C97D /* TransactionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CBD60C21882B0000A4C97D /* TransactionItem.m */; };
+		58D662222182AC500098D687 /* KeyStoreEty.h in Headers */ = {isa = PBXBuildFile; fileRef = 58D662202182AC500098D687 /* KeyStoreEty.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58D662232182AC500098D687 /* KeyStoreEty.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D662212182AC500098D687 /* KeyStoreEty.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58064A9D21AD17A400A36E73 /* SDKConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDKConfigure.h; sourceTree = "<group>"; };
+		58064A9E21AD17A400A36E73 /* SDKConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDKConfigure.m; sourceTree = "<group>"; };
+		58064AA521AD23BF00A36E73 /* Chain.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.pbobjc.h; sourceTree = "<group>"; };
+		58064AA621AD23BF00A36E73 /* Chain.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chain.pbobjc.m; sourceTree = "<group>"; };
 		580849212120863800E6A98C /* BUSendOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUSendOperation.h; sourceTree = "<group>"; };
 		580849222120863800E6A98C /* BUSendOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUSendOperation.m; sourceTree = "<group>"; };
 		58084925212086E600E6A98C /* BuServiceImpl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuServiceImpl.h; sourceTree = "<group>"; };
@@ -962,8 +971,6 @@
 		584AAA692125770E009F6199 /* sdk_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdk_ios.h; sourceTree = "<group>"; };
 		584AAA6A2125770E009F6199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		584AAA6D21258526009F6199 /* sdk_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sdk_ios.framework; path = ../libs/sdk_ios.framework; sourceTree = "<group>"; };
-		584D112821773C9A00D58D74 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		584D112921773C9B00D58D74 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		584D112C21773CE800D58D74 /* whrlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whrlpool.h; sourceTree = "<group>"; };
 		584D112D21773CE900D58D74 /* idea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idea.h; sourceTree = "<group>"; };
 		584D112E21773CE900D58D74 /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
@@ -1045,7 +1052,6 @@
 		584D11C821774F8100D58D74 /* Mnemonic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mnemonic.m; sourceTree = "<group>"; };
 		584D11CC217751A500D58D74 /* Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hash.m; sourceTree = "<group>"; };
 		584D11CD217751A500D58D74 /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hash.h; sourceTree = "<group>"; };
-		584D11D02177606100D58D74 /* english.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = english.txt; sourceTree = "<group>"; };
 		584D11D221781EAA00D58D74 /* BUChainKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BUChainKey.h; sourceTree = "<group>"; };
 		584D11D321781EAA00D58D74 /* BUChainKey.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BUChainKey.m; sourceTree = "<group>"; };
 		584D11D821782E3500D58D74 /* Base58.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base58.h; sourceTree = "<group>"; };
@@ -1067,13 +1073,13 @@
 		584D11EE217869D200D58D74 /* crypto_scrypt-hexconvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "crypto_scrypt-hexconvert.h"; sourceTree = "<group>"; };
 		584D11EF217869D300D58D74 /* b64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b64.h; sourceTree = "<group>"; };
 		584D11F0217869D300D58D74 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		584D120021786E6100D58D74 /* KeyStoreValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyStoreValue.h; sourceTree = "<group>"; };
-		584D120121786E6100D58D74 /* KeyStoreValue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyStoreValue.m; sourceTree = "<group>"; };
-		584D120421786E9E00D58D74 /* ScryptParams.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScryptParams.h; sourceTree = "<group>"; };
-		584D120521786E9E00D58D74 /* ScryptParams.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScryptParams.m; sourceTree = "<group>"; };
+		584D120421786E9E00D58D74 /* ScryptParamsEty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScryptParamsEty.h; sourceTree = "<group>"; };
+		584D120521786E9E00D58D74 /* ScryptParamsEty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScryptParamsEty.m; sourceTree = "<group>"; };
 		584D120821787C8F00D58D74 /* slowequals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slowequals.h; sourceTree = "<group>"; };
 		584D12162178989500D58D74 /* Keypair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keypair.h; sourceTree = "<group>"; };
 		584D12172178989600D58D74 /* Keypair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keypair.m; sourceTree = "<group>"; };
+		58832C7F2179BA7300F69BC3 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		58832C802179BA7400F69BC3 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		58998003211B12A900E4C9C2 /* ed25519-donna-impl-base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ed25519-donna-impl-base.h"; sourceTree = "<group>"; };
 		58998004211B12A900E4C9C2 /* ed25519-donna-64bit-x86-32bit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ed25519-donna-64bit-x86-32bit.h"; sourceTree = "<group>"; };
 		58998005211B12A900E4C9C2 /* ed25519-donna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ed25519-donna.h"; sourceTree = "<group>"; };
@@ -1228,11 +1234,11 @@
 		58998201211B18B100E4C9C2 /* TransactionServiceImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionServiceImpl.m; sourceTree = "<group>"; };
 		58998207211B375C00E4C9C2 /* SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDK.h; sourceTree = "<group>"; };
 		58998208211B375C00E4C9C2 /* SDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDK.m; sourceTree = "<group>"; };
-		58998224211C2C7400E4C9C2 /* YYClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYClassInfo.h; sourceTree = "<group>"; };
-		58998225211C2C7400E4C9C2 /* YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModel.h; sourceTree = "<group>"; };
-		58998226211C2C7400E4C9C2 /* NSObject+YYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModel.m"; sourceTree = "<group>"; };
-		58998227211C2C7400E4C9C2 /* YYClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYClassInfo.m; sourceTree = "<group>"; };
-		58998228211C2C7400E4C9C2 /* NSObject+YYModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModel.h"; sourceTree = "<group>"; };
+		58998224211C2C7400E4C9C2 /* YYModelClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModelClassInfo.h; sourceTree = "<group>"; };
+		58998225211C2C7400E4C9C2 /* YYModelClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYModelClass.h; sourceTree = "<group>"; };
+		58998226211C2C7400E4C9C2 /* NSObject+YYModelClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YYModelClass.m"; sourceTree = "<group>"; };
+		58998227211C2C7400E4C9C2 /* YYModelClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYModelClassInfo.m; sourceTree = "<group>"; };
+		58998228211C2C7400E4C9C2 /* NSObject+YYModelClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YYModelClass.h"; sourceTree = "<group>"; };
 		5899834C211D57A000E4C9C2 /* GPBCodedOutputStream_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBCodedOutputStream_PackagePrivate.h; sourceTree = "<group>"; };
 		5899834D211D57A000E4C9C2 /* GPBArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBArray.h; sourceTree = "<group>"; };
 		5899834E211D57A000E4C9C2 /* GPBExtensionRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPBExtensionRegistry.m; sourceTree = "<group>"; };
@@ -1259,7 +1265,6 @@
 		58998365211D57A000E4C9C2 /* GPBUtilities_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBUtilities_PackagePrivate.h; sourceTree = "<group>"; };
 		58998366211D57A000E4C9C2 /* GPBCodedInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPBCodedInputStream.m; sourceTree = "<group>"; };
 		58998367211D57A000E4C9C2 /* Wrappers.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wrappers.pbobjc.h; sourceTree = "<group>"; };
-		58998368211D57A000E4C9C2 /* Chain.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.pbobjc.h; sourceTree = "<group>"; };
 		58998369211D57A000E4C9C2 /* Struct.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Struct.pbobjc.h; sourceTree = "<group>"; };
 		5899836A211D57A000E4C9C2 /* FieldMask.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldMask.pbobjc.h; sourceTree = "<group>"; };
 		5899836B211D57A000E4C9C2 /* GPBWellKnownTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPBWellKnownTypes.m; sourceTree = "<group>"; };
@@ -1304,7 +1309,6 @@
 		58998392211D57A000E4C9C2 /* FieldMask.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldMask.pbobjc.m; sourceTree = "<group>"; };
 		58998393211D57A000E4C9C2 /* Struct.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Struct.pbobjc.m; sourceTree = "<group>"; };
 		58998394211D57A000E4C9C2 /* GPBDictionary_PackagePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPBDictionary_PackagePrivate.h; sourceTree = "<group>"; };
-		58998395211D57A000E4C9C2 /* Chain.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chain.pbobjc.m; sourceTree = "<group>"; };
 		58998447211D796A00E4C9C2 /* AssetServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetServiceProtocol.h; sourceTree = "<group>"; };
 		5899844B211D79AB00E4C9C2 /* AssetService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetService.h; sourceTree = "<group>"; };
 		5899844C211D79AB00E4C9C2 /* AssetService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetService.m; sourceTree = "<group>"; };
@@ -1320,6 +1324,12 @@
 		58998461211D809900E4C9C2 /* AssetIssueOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetIssueOperation.m; sourceTree = "<group>"; };
 		58998464211D823A00E4C9C2 /* AssetSendOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetSendOperation.h; sourceTree = "<group>"; };
 		58998465211D823A00E4C9C2 /* AssetSendOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssetSendOperation.m; sourceTree = "<group>"; };
+		589E1E6C2189A8C2009C68B7 /* TransactionTestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionTestRequest.m; sourceTree = "<group>"; };
+		589E1E6D2189A8C2009C68B7 /* TransactionTestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionTestRequest.h; sourceTree = "<group>"; };
+		58CBD60B21882B0000A4C97D /* TransactionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransactionItem.h; sourceTree = "<group>"; };
+		58CBD60C21882B0000A4C97D /* TransactionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransactionItem.m; sourceTree = "<group>"; };
+		58D662202182AC500098D687 /* KeyStoreEty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyStoreEty.h; sourceTree = "<group>"; };
+		58D662212182AC500098D687 /* KeyStoreEty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyStoreEty.m; sourceTree = "<group>"; };
 		58FED02C2117EF6F00702DDB /* sdk_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sdk_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1328,8 +1338,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				584D112B21773C9B00D58D74 /* libssl.a in Frameworks */,
-				584D112A21773C9B00D58D74 /* libcrypto.a in Frameworks */,
+				58832C822179BA7500F69BC3 /* libssl.a in Frameworks */,
+				58832C812179BA7500F69BC3 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,7 +1440,6 @@
 				584AAA692125770E009F6199 /* sdk_ios.h */,
 				58998207211B375C00E4C9C2 /* SDK.h */,
 				58998208211B375C00E4C9C2 /* SDK.m */,
-				584D11D02177606100D58D74 /* english.txt */,
 				584AAA6A2125770E009F6199 /* Info.plist */,
 			);
 			path = "sdk-ios";
@@ -1570,8 +1579,8 @@
 		58997F67211B123100E4C9C2 /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				584D112821773C9A00D58D74 /* libcrypto.a */,
-				584D112921773C9B00D58D74 /* libssl.a */,
+				58832C7F2179BA7300F69BC3 /* libcrypto.a */,
+				58832C802179BA7400F69BC3 /* libssl.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -1724,9 +1733,9 @@
 			isa = PBXGroup;
 			children = (
 				5899812F211B182100E4C9C2 /* General.h */,
+				58998133211B182100E4C9C2 /* General.m */,
 				58998130211B182100E4C9C2 /* Constant.h */,
 				58998132211B182100E4C9C2 /* Constant.m */,
-				58998133211B182100E4C9C2 /* General.m */,
 				58998131211B182100E4C9C2 /* Tools.h */,
 				58998134211B182100E4C9C2 /* Tools.mm */,
 			);
@@ -1758,6 +1767,8 @@
 			isa = PBXGroup;
 			children = (
 				58998153211B185F00E4C9C2 /* operation */,
+				589E1E6D2189A8C2009C68B7 /* TransactionTestRequest.h */,
+				589E1E6C2189A8C2009C68B7 /* TransactionTestRequest.m */,
 				58998162211B185F00E4C9C2 /* AccountCheckValidRequest.h */,
 				5899815F211B185F00E4C9C2 /* AccountCheckValidRequest.m */,
 				5899814F211B185E00E4C9C2 /* AccountGetAssetsRequest.h */,
@@ -1818,6 +1829,8 @@
 				584AA9F821248207009F6199 /* BlockGetRewardRequest.m */,
 				584AAA13212483D1009F6199 /* BlockGetFeesRequest.h */,
 				584AAA14212483D1009F6199 /* BlockGetFeesRequest.m */,
+				58064A9D21AD17A400A36E73 /* SDKConfigure.h */,
+				58064A9E21AD17A400A36E73 /* SDKConfigure.m */,
 			);
 			path = request;
 			sourceTree = "<group>";
@@ -2126,10 +2139,12 @@
 				584AA9FC21248230009F6199 /* ValidatorRewardInfo.m */,
 				584AAA1721248403009F6199 /* Fees.h */,
 				584AAA1821248403009F6199 /* Fees.m */,
-				584D120021786E6100D58D74 /* KeyStoreValue.h */,
-				584D120121786E6100D58D74 /* KeyStoreValue.m */,
-				584D120421786E9E00D58D74 /* ScryptParams.h */,
-				584D120521786E9E00D58D74 /* ScryptParams.m */,
+				584D120421786E9E00D58D74 /* ScryptParamsEty.h */,
+				584D120521786E9E00D58D74 /* ScryptParamsEty.m */,
+				58D662202182AC500098D687 /* KeyStoreEty.h */,
+				58D662212182AC500098D687 /* KeyStoreEty.m */,
+				58CBD60B21882B0000A4C97D /* TransactionItem.h */,
+				58CBD60C21882B0000A4C97D /* TransactionItem.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -2170,11 +2185,11 @@
 		58998223211C2C7400E4C9C2 /* YYModel */ = {
 			isa = PBXGroup;
 			children = (
-				58998224211C2C7400E4C9C2 /* YYClassInfo.h */,
-				58998225211C2C7400E4C9C2 /* YYModel.h */,
-				58998226211C2C7400E4C9C2 /* NSObject+YYModel.m */,
-				58998227211C2C7400E4C9C2 /* YYClassInfo.m */,
-				58998228211C2C7400E4C9C2 /* NSObject+YYModel.h */,
+				58998224211C2C7400E4C9C2 /* YYModelClassInfo.h */,
+				58998225211C2C7400E4C9C2 /* YYModelClass.h */,
+				58998226211C2C7400E4C9C2 /* NSObject+YYModelClass.m */,
+				58998227211C2C7400E4C9C2 /* YYModelClassInfo.m */,
+				58998228211C2C7400E4C9C2 /* NSObject+YYModelClass.h */,
 			);
 			path = YYModel;
 			sourceTree = "<group>";
@@ -2182,6 +2197,8 @@
 		5899834B211D57A000E4C9C2 /* protobuf */ = {
 			isa = PBXGroup;
 			children = (
+				58064AA521AD23BF00A36E73 /* Chain.pbobjc.h */,
+				58064AA621AD23BF00A36E73 /* Chain.pbobjc.m */,
 				5899834C211D57A000E4C9C2 /* GPBCodedOutputStream_PackagePrivate.h */,
 				5899834D211D57A000E4C9C2 /* GPBArray.h */,
 				5899834E211D57A000E4C9C2 /* GPBExtensionRegistry.m */,
@@ -2208,7 +2225,6 @@
 				58998365211D57A000E4C9C2 /* GPBUtilities_PackagePrivate.h */,
 				58998366211D57A000E4C9C2 /* GPBCodedInputStream.m */,
 				58998367211D57A000E4C9C2 /* Wrappers.pbobjc.h */,
-				58998368211D57A000E4C9C2 /* Chain.pbobjc.h */,
 				58998369211D57A000E4C9C2 /* Struct.pbobjc.h */,
 				5899836A211D57A000E4C9C2 /* FieldMask.pbobjc.h */,
 				5899836B211D57A000E4C9C2 /* GPBWellKnownTypes.m */,
@@ -2253,7 +2269,6 @@
 				58998392211D57A000E4C9C2 /* FieldMask.pbobjc.m */,
 				58998393211D57A000E4C9C2 /* Struct.pbobjc.m */,
 				58998394211D57A000E4C9C2 /* GPBDictionary_PackagePrivate.h */,
-				58998395211D57A000E4C9C2 /* Chain.pbobjc.m */,
 			);
 			path = protobuf;
 			sourceTree = "<group>";
@@ -2318,10 +2333,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58064A9F21AD17A400A36E73 /* SDKConfigure.h in Headers */,
 				584D12182178989600D58D74 /* Keypair.h in Headers */,
-				584D120621786E9F00D58D74 /* ScryptParams.h in Headers */,
+				58998229211C2C7400E4C9C2 /* YYModelClassInfo.h in Headers */,
+				58D662222182AC500098D687 /* KeyStoreEty.h in Headers */,
+				5899822D211C2C7400E4C9C2 /* NSObject+YYModelClass.h in Headers */,
+				584D120621786E9F00D58D74 /* ScryptParamsEty.h in Headers */,
 				584D11E0217868A600D58D74 /* KeyStore.h in Headers */,
-				584D120221786E6100D58D74 /* KeyStoreValue.h in Headers */,
 				584D11C921774F8100D58D74 /* Mnemonic.h in Headers */,
 				584AAA6B2125770E009F6199 /* sdk_ios.h in Headers */,
 				58998137211B182200E4C9C2 /* Tools.h in Headers */,
@@ -2331,12 +2349,10 @@
 				584AAA4721251155009F6199 /* Ctp10TokenServiceProtocol.h in Headers */,
 				584AA934212421E0009F6199 /* Ctp10TokenAssignParams.h in Headers */,
 				580849952120A33F00E6A98C /* TokenInfo.h in Headers */,
-				5899822A211C2C7400E4C9C2 /* YYModel.h in Headers */,
+				5899822A211C2C7400E4C9C2 /* YYModelClass.h in Headers */,
 				584D11A921773D1300D58D74 /* ecdsa.h in Headers */,
 				584AAA4521251033009F6199 /* BlockServiceProtocol.h in Headers */,
 				584AAA4621251119009F6199 /* ContractServiceProtocol.h in Headers */,
-				5899822D211C2C7400E4C9C2 /* NSObject+YYModel.h in Headers */,
-				58998229211C2C7400E4C9C2 /* YYClassInfo.h in Headers */,
 				58998462211D809900E4C9C2 /* AssetIssueOperation.h in Headers */,
 				580849232120863800E6A98C /* BUSendOperation.h in Headers */,
 				584AAA1921248403009F6199 /* Fees.h in Headers */,
@@ -2362,6 +2378,7 @@
 				584D11F1217869D400D58D74 /* sysendian.h in Headers */,
 				584AA9F921248207009F6199 /* BlockGetRewardRequest.h in Headers */,
 				584AA96821245104009F6199 /* TransactionParseBlobRequest.h in Headers */,
+				58064AA721AD23C000A36E73 /* Chain.pbobjc.h in Headers */,
 				584AA988212455F7009F6199 /* TransactionEvaluateFeeResult.h in Headers */,
 				584AA9F5212481B8009F6199 /* BlockGetLatestValidatorsResponse.h in Headers */,
 				584AA9ED21248007009F6199 /* BlockGetValidatorsResponse.h in Headers */,
@@ -2501,6 +2518,7 @@
 				589981E5211B189500E4C9C2 /* AccountCheckValidResponse.h in Headers */,
 				589981F2211B189500E4C9C2 /* AccountGetAssetsResponse.h in Headers */,
 				584D119521773D1300D58D74 /* safestack.h in Headers */,
+				58CBD60D21882B0000A4C97D /* TransactionItem.h in Headers */,
 				589981F1211B189500E4C9C2 /* AccountCreateResponse.h in Headers */,
 				589981F9211B189500E4C9C2 /* AccountGetNonceResponse.h in Headers */,
 				589981EE211B189500E4C9C2 /* TransactionBuildBlobResponse.h in Headers */,
@@ -2590,7 +2608,6 @@
 				589983B1211D57A000E4C9C2 /* Struct.pbobjc.h in Headers */,
 				589983A4211D57A000E4C9C2 /* Duration.pbobjc.h in Headers */,
 				584AA94421242B8F009F6199 /* Ctp10TokenAllowanceParams.h in Headers */,
-				589983B0211D57A000E4C9C2 /* Chain.pbobjc.h in Headers */,
 				589983A0211D57A000E4C9C2 /* Common.pbobjc.h in Headers */,
 				584AA92C21241E45009F6199 /* Ctp10TokenApproveParams.h in Headers */,
 				58998452211D7B3400E4C9C2 /* AssetServiceImpl.h in Headers */,
@@ -2626,6 +2643,7 @@
 				580849BB2121E1D000E6A98C /* Ctp10TokenIssueParams.h in Headers */,
 				584AA940212424F2009F6199 /* Ctp10TokenChangeOwnerInput.h in Headers */,
 				589983C5211D57A000E4C9C2 /* GPBMessage_PackagePrivate.h in Headers */,
+				589E1E6F2189A8C2009C68B7 /* TransactionTestRequest.h in Headers */,
 				589983C2211D57A000E4C9C2 /* GPBUtilities.h in Headers */,
 				589983AA211D57A000E4C9C2 /* GPBCodedOutputStream.h in Headers */,
 				584D11A721773D1300D58D74 /* txt_db.h in Headers */,
@@ -2764,7 +2782,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				584D11D12177606200D58D74 /* english.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2778,7 +2795,6 @@
 				584AAA4921255279009F6199 /* BlockCheckStatusLedgerSeqResult.m in Sources */,
 				584AAA482125526F009F6199 /* BlockCheckStatusLedgerSeqResponse.m in Sources */,
 				58084928212086E600E6A98C /* BuServiceImpl.m in Sources */,
-				589983DD211D57A100E4C9C2 /* Chain.pbobjc.m in Sources */,
 				584AA999212458EE009F6199 /* TransactionGetInfoResult.m in Sources */,
 				58998467211D823A00E4C9C2 /* AssetSendOperation.m in Sources */,
 				584AA93D212424CB009F6199 /* Ctp10TokenChangeOwnerParams.m in Sources */,
@@ -2798,7 +2814,7 @@
 				5808495621209EC300E6A98C /* Ctp10TokenGetInfoRequest.m in Sources */,
 				584AA8D52122BAB2009F6199 /* AccountActiviateInfo.m in Sources */,
 				589981B2211B188300E4C9C2 /* AccountCreateResult.m in Sources */,
-				584D120321786E6100D58D74 /* KeyStoreValue.m in Sources */,
+				58064AA821AD23C000A36E73 /* Chain.pbobjc.m in Sources */,
 				584AA90D2122D623009F6199 /* ContractService.m in Sources */,
 				5899845B211D7E0300E4C9C2 /* AssetGetInfoResult.m in Sources */,
 				58998051211B12FD00E4C9C2 /* my_crypto.cpp in Sources */,
@@ -2814,7 +2830,7 @@
 				589981BD211B188300E4C9C2 /* TypeThreshold.m in Sources */,
 				580849A22120A4BC00E6A98C /* Ctp10TokenGetNameResult.m in Sources */,
 				580849BC2121E1D000E6A98C /* Ctp10TokenIssueParams.m in Sources */,
-				5899822C211C2C7400E4C9C2 /* YYClassInfo.m in Sources */,
+				5899822C211C2C7400E4C9C2 /* YYModelClassInfo.m in Sources */,
 				58998026211B12AB00E4C9C2 /* ed25519.c in Sources */,
 				584AAA2E21248C3B009F6199 /* BlockService.m in Sources */,
 				58998171211B186000E4C9C2 /* AccountActivateOperation.m in Sources */,
@@ -2885,6 +2901,7 @@
 				589983B7211D57A000E4C9C2 /* SourceContext.pbobjc.m in Sources */,
 				5808498A2120A27C00E6A98C /* Ctp10TokenGetTotalSupplyResponse.m in Sources */,
 				589983B6211D57A000E4C9C2 /* GPBUnknownField.m in Sources */,
+				58CBD60E21882B0000A4C97D /* TransactionItem.m in Sources */,
 				5899813A211B182200E4C9C2 /* Tools.mm in Sources */,
 				584AAA5121255E34009F6199 /* BlockRewardJsonResult.m in Sources */,
 				5808496A21209F8700E6A98C /* Ctp10TokenGetBalanceRequest.m in Sources */,
@@ -2899,6 +2916,7 @@
 				58998172211B186000E4C9C2 /* AccountSetPrivilegeOperation.m in Sources */,
 				584D11CE217751A500D58D74 /* Hash.m in Sources */,
 				584D11F2217869D400D58D74 /* crypto_scrypt-hexconvert.c in Sources */,
+				589E1E6E2189A8C2009C68B7 /* TransactionTestRequest.m in Sources */,
 				589981B9211B188300E4C9C2 /* AccountGetAssetsResult.m in Sources */,
 				580849B22120A6C100E6A98C /* Ctp10TokenGetBalanceResult.m in Sources */,
 				584AA96D21245176009F6199 /* TransactionParseBlobResult.m in Sources */,
@@ -2923,6 +2941,7 @@
 				584AA9AE212479AE009F6199 /* BlockGetNumberResult.m in Sources */,
 				580849762120A1F500E6A98C /* Ctp10TokenAllowanceResponse.m in Sources */,
 				5808493821209A5F00E6A98C /* Ctp10TokenApproveOperation.m in Sources */,
+				58064AA021AD17A400A36E73 /* SDKConfigure.m in Sources */,
 				580849822120A24E00E6A98C /* Ctp10TokenGetSymbolResponse.m in Sources */,
 				584AA989212455F7009F6199 /* TransactionEvaluateFeeResult.m in Sources */,
 				5899804F211B12FD00E4C9C2 /* base_int.cpp in Sources */,
@@ -2973,6 +2992,7 @@
 				584AA9F22124817F009F6199 /* BlockGetLatestValidatorsResult.m in Sources */,
 				584AA94521242B8F009F6199 /* Ctp10TokenAllowanceParams.m in Sources */,
 				584AA9CA21247D39009F6199 /* BlockGetInfoRequest.m in Sources */,
+				58D662232182AC500098D687 /* KeyStoreEty.m in Sources */,
 				584D11D521781EAA00D58D74 /* BUChainKey.m in Sources */,
 				584AA9192122D9AC009F6199 /* ContractInvokeByAssetOperation.m in Sources */,
 				584D11F4217869D400D58D74 /* crypto_scrypt-check.c in Sources */,
@@ -3009,7 +3029,7 @@
 				58998463211D809900E4C9C2 /* AssetIssueOperation.m in Sources */,
 				584AA921212403B6009F6199 /* ContractCallInput.m in Sources */,
 				584AA8D12122BA18009F6199 /* OperationInfo.m in Sources */,
-				5899822B211C2C7400E4C9C2 /* NSObject+YYModel.m in Sources */,
+				5899822B211C2C7400E4C9C2 /* NSObject+YYModelClass.m in Sources */,
 				589981BA211B188300E4C9C2 /* AccountGetBalanceResult.m in Sources */,
 				5808499E2120A3E400E6A98C /* Ctp10TokenGetInfoResult.m in Sources */,
 				589981E7211B189500E4C9C2 /* AccountGetMetadataResponse.m in Sources */,
@@ -3018,7 +3038,7 @@
 				5808497E2120A22B00E6A98C /* Ctp10TokenGetNameResponse.m in Sources */,
 				584AA9012122CC68009F6199 /* ContractAddressInfo.m in Sources */,
 				584AAA1A21248403009F6199 /* Fees.m in Sources */,
-				584D120721786E9F00D58D74 /* ScryptParams.m in Sources */,
+				584D120721786E9F00D58D74 /* ScryptParamsEty.m in Sources */,
 				5899839D211D57A000E4C9C2 /* GPBDescriptor.m in Sources */,
 				58998206211B18B100E4C9C2 /* TransactionServiceImpl.m in Sources */,
 				589981F5211B189500E4C9C2 /* BaseResponse.m in Sources */,
@@ -3166,8 +3186,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = NO;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3185,8 +3205,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/crypto/openssl/lib",
 				);
-				MACH_O_TYPE = mh_dylib;
-				PRODUCT_BUNDLE_IDENTIFIER = "sdk-ios";
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = io.bumo.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3197,8 +3217,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = NO;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3216,8 +3236,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/crypto/openssl/lib",
 				);
-				MACH_O_TYPE = mh_dylib;
-				PRODUCT_BUNDLE_IDENTIFIER = "sdk-ios";
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = io.bumo.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

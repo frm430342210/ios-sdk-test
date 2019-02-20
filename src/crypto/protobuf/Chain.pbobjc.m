@@ -13,8 +13,10 @@
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
- #import "Chain.pbobjc.h"
- #import "Common.pbobjc.h"
+#import <stdatomic.h>
+
+#import "Chain.pbobjc.h"
+#import "Common.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -46,7 +48,7 @@ static GPBFileDescriptor *ChainRoot_FileDescriptor(void) {
 #pragma mark - Enum Limit
 
 GPBEnumDescriptor *Limit_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unknown\000Signature\000";
@@ -60,7 +62,8 @@ GPBEnumDescriptor *Limit_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:Limit_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -472,6 +475,7 @@ typedef struct AssetStore__storage_ {
 @dynamic validatorsHash;
 @dynamic feesHash;
 @dynamic reserve;
+@dynamic chainId;
 
 typedef struct LedgerHeader__storage_ {
   uint32_t _has_storage_[1];
@@ -486,6 +490,7 @@ typedef struct LedgerHeader__storage_ {
   int64_t closeTime;
   int64_t version;
   int64_t txCount;
+  int64_t chainId;
 } LedgerHeader__storage_;
 
 // This method is threadsafe because it is initially called
@@ -592,6 +597,15 @@ typedef struct LedgerHeader__storage_ {
         .offset = (uint32_t)offsetof(LedgerHeader__storage_, reserve),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "chainId",
+        .dataTypeSpecific.className = NULL,
+        .number = LedgerHeader_FieldNumber_ChainId,
+        .hasIndex = 11,
+        .offset = (uint32_t)offsetof(LedgerHeader__storage_, chainId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeInt64,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1396,7 +1410,7 @@ void SetOperation_Type_RawValue(Operation *message, int32_t value) {
 #pragma mark - Enum Operation_Type
 
 GPBEnumDescriptor *Operation_Type_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unknown\000CreateAccount\000IssueAsset\000PayAsse"
@@ -1420,7 +1434,8 @@ GPBEnumDescriptor *Operation_Type_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:Operation_Type_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -1510,6 +1525,7 @@ typedef struct OperationSetThreshold__storage_ {
 @dynamic ceilLedgerSeq;
 @dynamic metadata;
 @dynamic operationsArray, operationsArray_Count;
+@dynamic chainId;
 
 typedef struct Transaction__storage_ {
   uint32_t _has_storage_[1];
@@ -1520,6 +1536,7 @@ typedef struct Transaction__storage_ {
   int64_t feeLimit;
   int64_t gasPrice;
   int64_t ceilLedgerSeq;
+  int64_t chainId;
 } Transaction__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1591,6 +1608,15 @@ typedef struct Transaction__storage_ {
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
+      {
+        .name = "chainId",
+        .dataTypeSpecific.className = NULL,
+        .number = Transaction_FieldNumber_ChainId,
+        .hasIndex = 6,
+        .offset = (uint32_t)offsetof(Transaction__storage_, chainId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeInt64,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[Transaction class]
@@ -1611,7 +1637,7 @@ typedef struct Transaction__storage_ {
 #pragma mark - Enum Transaction_Limit
 
 GPBEnumDescriptor *Transaction_Limit_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unknown\000Operations\000";
@@ -1625,7 +1651,8 @@ GPBEnumDescriptor *Transaction_Limit_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:Transaction_Limit_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -1699,7 +1726,7 @@ typedef struct Signer__storage_ {
 #pragma mark - Enum Signer_Limit
 
 GPBEnumDescriptor *Signer_Limit_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "SignerNone\000Signer\000";
@@ -1713,7 +1740,8 @@ GPBEnumDescriptor *Signer_Limit_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:Signer_Limit_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -1810,7 +1838,7 @@ void SetTrigger_TransactionType_RawValue(Trigger *message, int32_t value) {
 #pragma mark - Enum Trigger_TransactionType
 
 GPBEnumDescriptor *Trigger_TransactionType_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "NormalTransaction\000ContractTransaction\000";
@@ -1824,7 +1852,8 @@ GPBEnumDescriptor *Trigger_TransactionType_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:Trigger_TransactionType_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }
@@ -2345,7 +2374,7 @@ void SetContract_Type_RawValue(Contract *message, int32_t value) {
 #pragma mark - Enum Contract_ContractType
 
 GPBEnumDescriptor *Contract_ContractType_EnumDescriptor(void) {
-  static GPBEnumDescriptor *descriptor = NULL;
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Javascript\000";
@@ -2358,7 +2387,8 @@ GPBEnumDescriptor *Contract_ContractType_EnumDescriptor(void) {
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
                                      enumVerifier:Contract_ContractType_IsValidValue];
-    if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
     }
   }

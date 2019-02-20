@@ -7,7 +7,7 @@
 //
 
 #import "BlockGetValidatorsResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockGetValidatorsResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

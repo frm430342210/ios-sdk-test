@@ -7,7 +7,7 @@
 //
 
 #import "ContractCallInput.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation ContractCallInput
 + (NSDictionary *)modelCustomPropertyMapper {

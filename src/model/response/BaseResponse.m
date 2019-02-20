@@ -7,7 +7,7 @@
 //
 
 #import "BaseResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BaseResponse
 + (NSDictionary *)modelCustomPropertyMapper {

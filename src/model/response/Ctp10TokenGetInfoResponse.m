@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenGetInfoResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenGetInfoResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

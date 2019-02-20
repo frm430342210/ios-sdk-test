@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenChangeOwnerInput.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenChangeOwnerInput
 + (NSDictionary *)modelContainerPropertyGenericClass {

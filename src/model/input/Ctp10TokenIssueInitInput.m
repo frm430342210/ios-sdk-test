@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenIssueInitInput.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenIssueInitInput
 + (NSDictionary *)modelContainerPropertyGenericClass {

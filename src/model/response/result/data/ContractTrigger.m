@@ -7,7 +7,7 @@
 //
 
 #import "ContractTrigger.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation ContractTrigger
 + (NSDictionary *)modelContainerPropertyGenericClass {

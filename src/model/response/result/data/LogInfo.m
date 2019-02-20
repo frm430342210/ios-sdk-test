@@ -7,7 +7,7 @@
 //
 
 #import "LogInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation LogInfo
 + (NSDictionary *)modelContainerPropertyGenericClass {

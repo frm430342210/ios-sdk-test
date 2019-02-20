@@ -33,7 +33,7 @@
         case INVALID_TX_THRESHOLD_ERROR:  errorDesc = @"TxThreshold must be between 0 and max(int64)"; break;
         case INVALID_TYPETHRESHOLD_TYPE_ERROR: errorDesc = @"Operation type must be between 1 and 100"; break;
         case INVALID_TYPE_THRESHOLD_ERROR: errorDesc = @"TypeThreshold must be between 0 and max(int64)"; break;
-        case INVALID_ASSET_CODE_ERROR: errorDesc = @"The length of key must be between 1 and 64"; break;
+        case INVALID_ASSET_CODE_ERROR: errorDesc = @"The length of asset code must be between 1 and 64"; break;
         case INVALID_ASSET_AMOUNT_ERROR: errorDesc = @"AssetAmount must be between 0 and max(int64)"; break;
         case INVALID_BU_AMOUNT_ERROR: errorDesc = @"BuAmount must be between 0 and max(int64)"; break;
         case INVALID_ISSUER_ADDRESS_ERROR: errorDesc = @"Invalid issuer address"; break;

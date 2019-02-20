@@ -7,7 +7,7 @@
 //
 
 #import "BlockHeader.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockHeader
 + (NSDictionary *)modelCustomPropertyMapper {

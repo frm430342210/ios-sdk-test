@@ -7,7 +7,7 @@
 //
 
 #import "BlockGetLatestInfoResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockGetLatestInfoResult
 + (NSDictionary *)modelContainerPropertyGenericClass {

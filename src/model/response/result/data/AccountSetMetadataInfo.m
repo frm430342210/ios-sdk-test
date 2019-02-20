@@ -7,7 +7,7 @@
 //
 
 #import "AccountSetMetadataInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountSetMetadataInfo
 + (NSDictionary *)modelCustomPropertyMapper {

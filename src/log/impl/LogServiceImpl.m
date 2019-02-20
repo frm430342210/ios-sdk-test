@@ -13,7 +13,7 @@
 #import "Http.h"
 #import "SDKError.h"
 #import "SDKException.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation LogServiceImpl
 + (Operation *) create : (LogCreateOperation *) logCreateOperation {

@@ -7,7 +7,7 @@
 //
 
 #import "TransactionEnvs.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionEnvs
 + (NSDictionary *)modelCustomPropertyMapper {

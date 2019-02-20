@@ -7,7 +7,7 @@
 //
 
 #import "AccountGetMetadataResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountGetMetadataResult
 + (NSDictionary *)modelContainerPropertyGenericClass {

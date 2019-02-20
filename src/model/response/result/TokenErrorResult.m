@@ -7,7 +7,7 @@
 //
 
 #import "TokenErrorResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TokenErrorResult
 + (NSDictionary *)modelContainerPropertyGenericClass {

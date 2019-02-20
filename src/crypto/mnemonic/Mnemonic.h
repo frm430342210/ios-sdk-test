@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Mnemonic : NSObject
 + (NSArray *) generateMnemonicCode: (NSData *)random;
++ (NSData *) randomFromMnemonicCode: (NSArray *)mnemonicCodes;
 + (NSArray *) generatePrivateKeys: (NSArray *)mnemonicCodes : (NSArray *)hdPaths;
 @end
 

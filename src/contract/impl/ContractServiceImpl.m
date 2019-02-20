@@ -16,7 +16,7 @@
 #import "Http.h"
 #import "SDKError.h"
 #import "SDKException.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation ContractServiceImpl
 /**
@@ -65,7 +65,7 @@
     OperationCreateAccount *operationCreateAccount = [OperationCreateAccount message];
     [operationCreateAccount setInitBalance : initBalance];
     if (![Tools isEmpty: initInput]) {
-        [operationCreateAccount setInitInput : [initInput yy_modelToJSONString]];
+        [operationCreateAccount setInitInput : initInput];
     }
     Contract *contract = [Contract message];
     if (!Contract_ContractType_IsValidValue(type)) {
@@ -115,11 +115,11 @@
         @throw [[SDKException alloc] initWithCode : SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR];
     }
     NSString *code = [contractInvokeByAssetOperation getCode];
-    if ([Tools isEmpty : code] || [code length] > ASSET_CODE_MAX) {
+    if (![Tools isEmpty : code] && [code length] > ASSET_CODE_MAX) {
         @throw [[SDKException alloc] initWithCode : INVALID_ASSET_CODE_ERROR];
     }
     NSString *issuer = [contractInvokeByAssetOperation getIssuer];
-    if (![Tools isAddressValid : issuer]) {
+    if (![Tools isEmpty : issuer] && ![Tools isAddressValid : issuer]) {
         @throw [[SDKException alloc] initWithCode : INVALID_ISSUER_ADDRESS_ERROR];
     }
     int64_t amount = [contractInvokeByAssetOperation getAmount];
@@ -142,16 +142,18 @@
     }
     OperationPayAsset *operationPayAsset = [OperationPayAsset message];
     [operationPayAsset setDestAddress : contractAddress];
-    if ([Tools isEmpty: input]) {
+    if (![Tools isEmpty: input]) {
         [operationPayAsset setInput: input];
     }
-    AssetKey *assetKey = [AssetKey message];
-    [assetKey setCode : code];
-    [assetKey setIssuer : issuer];
-    Asset *asset = [Asset message];
-    [asset setKey : assetKey];
-    [asset setAmount : amount];
-    [operationPayAsset setAsset : asset];
+    if (![Tools isEmpty : code] && ![Tools isEmpty : issuer] && amount > 0) {
+        AssetKey *assetKey = [AssetKey message];
+        [assetKey setCode : code];
+        [assetKey setIssuer : issuer];
+        Asset *asset = [Asset message];
+        [asset setKey : assetKey];
+        [asset setAmount : amount];
+        [operationPayAsset setAsset : asset];
+    }
     [operation setPayAsset : operationPayAsset];
     return operation;
 }
@@ -236,10 +238,10 @@
         contractGetInfoResponse = [ContractServiceImpl getContractInfo: contractAddress];
     }
     @catch(SDKException *sdkException) {
-        [contractGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(contractGetInfoResult)];
+        [contractGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(contractGetInfoResult)];
     }
     @catch(NSException *exception) {
-        [contractGetInfoResponse buildResponse: (SYSTEM_ERROR) :(contractGetInfoResult)];
+        [contractGetInfoResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(contractGetInfoResult)];
     }
     return contractGetInfoResponse;
 }
@@ -267,10 +269,10 @@
         [contractCheckValidResponse buildResponse: (SUCCESS) :(contractCheckValidResult)];
     }
     @catch(SDKException *sdkException) {
-        [contractCheckValidResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(contractCheckValidResult)];
+        [contractCheckValidResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(contractCheckValidResult)];
     }
     @catch(NSException *exception) {
-        [contractCheckValidResponse buildResponse: (SYSTEM_ERROR) :(contractCheckValidResult)];
+        [contractCheckValidResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(contractCheckValidResult)];
     }
     return contractCheckValidResponse;
 }
@@ -313,10 +315,10 @@
         int64_t contractBalance = [contractCallRequest getContractBalance];
         contractCallResponse = [ContractServiceImpl callContract:sourceAddress :contractAddress :optType : code : input : contractBalance : gasPrice : feeLimit];
     }@catch(SDKException *sdkException) {
-        [contractCallResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(contractCallResult)];
+        [contractCallResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(contractCallResult)];
     }
     @catch(NSException *exception) {
-        [contractCallResponse buildResponse: (SYSTEM_ERROR) :(contractCallResult)];
+        [contractCallResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(contractCallResult)];
     }
     return contractCallResponse;
 }
@@ -368,10 +370,10 @@
         [contractGetAddressResponse buildResponse: SUCCESS : contractGetAddressResult];
     }
     @catch(SDKException *sdkException) {
-        [contractGetAddressResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(contractGetAddressResult)];
+        [contractGetAddressResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(contractGetAddressResult)];
     }
     @catch(NSException *exception) {
-        [contractGetAddressResponse buildResponse: (SYSTEM_ERROR) :(contractGetAddressResult)];
+        [contractGetAddressResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(contractGetAddressResult)];
     }
     return contractGetAddressResponse;
 }
@@ -401,7 +403,7 @@
         @throw [[SDKException alloc] initWithCode : INVALID_SOURCEADDRESS_ERROR];
     }
     if (![Tools isEmpty: contractAddress] && ![Tools isAddressValid : contractAddress]) {
-        @throw [[SDKException alloc] initWithCode : INVALID_DESTADDRESS_ERROR];
+        @throw [[SDKException alloc] initWithCode : INVALID_CONTRACTADDRESS_ERROR];
     }
     BOOL isNotValid = ![Tools isEmpty : sourceAddress] && [sourceAddress isEqualToString : contractAddress];
     if (isNotValid) {
@@ -411,7 +413,7 @@
         @throw [[SDKException alloc] initWithCode : INVALID_OPTTYPE_ERROR];
     }
     if ([Tools isEmpty: code] && [Tools isEmpty: contractAddress]) {
-        @throw [[SDKException alloc] initWithCode : SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR];
+        @throw [[SDKException alloc] initWithCode : CONTRACTADDRESS_CODE_BOTH_NULL_ERROR];
     }
     if (feeLimit < FEE_LIMIT_MIN) {
         @throw [[SDKException alloc] initWithCode : INVALID_FEELIMIT_ERROR];

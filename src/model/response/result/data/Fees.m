@@ -7,7 +7,7 @@
 //
 
 #import "Fees.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Fees
 + (NSDictionary *)modelCustomPropertyMapper {

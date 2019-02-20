@@ -7,7 +7,7 @@
 //
 
 #import "TransactionSignResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionSignResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

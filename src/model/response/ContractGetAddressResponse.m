@@ -7,7 +7,7 @@
 //
 
 #import "ContractGetAddressResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation ContractGetAddressResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

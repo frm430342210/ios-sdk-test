@@ -7,13 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OperationInfo.h"
+#import "TransactionParseBlobResult.h"
 
-@interface TransactionInfo : NSObject
-@property (nonatomic, copy) NSString *sourceAddress;
-@property (nonatomic, assign) int64_t feeLimit;
-@property (nonatomic, assign) int64_t gasPrice;
-@property (nonatomic, assign) int64_t nonce;
-@property (nonatomic, copy) NSString *metadata;
-@property (nonatomic, strong) NSArray *operations;
+@interface TransactionInfo : TransactionParseBlobResult
 @end

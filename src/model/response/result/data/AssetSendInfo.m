@@ -7,7 +7,7 @@
 //
 
 #import "AssetSendInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AssetSendInfo
 + (NSDictionary *)modelCustomPropertyMapper {

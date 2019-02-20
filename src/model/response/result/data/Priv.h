@@ -13,5 +13,5 @@
 @interface Priv : NSObject
 @property (nonatomic, copy) NSString *masterWeight;
 @property (nonatomic, strong) NSArray<SignerInfo *> *signers;
-@property (nonatomic, strong) Threshold *threshold;
+@property (nonatomic, strong) Threshold *thresholds;
 @end

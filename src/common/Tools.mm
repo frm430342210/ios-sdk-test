@@ -152,51 +152,6 @@
     return hashHex;
 }
 
-+ (NSString *) sha224 : (NSData *) data {
-    uint8_t digest[CC_SHA224_DIGEST_LENGTH];
-    CC_SHA224([data bytes], (CC_LONG)[data length], digest);
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA224_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA224_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    return output;
-}
-
-+ (NSString*) sha256 : (NSData *) data {
-    uint8_t digest[CC_SHA256_DIGEST_LENGTH];
-    CC_SHA256(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    return output;
-}
-
-+ (NSString*) sha384 : (NSData *) data {
-    uint8_t digest[CC_SHA384_DIGEST_LENGTH];
-    CC_SHA384(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA384_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA384_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    return output;
-}
-
-+ (NSString*) sha512 : (NSData *) data {
-    uint8_t digest[CC_SHA512_DIGEST_LENGTH];
-    CC_SHA512(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA512_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    return output;
-}
-
-+ (NSString*) md5 : (NSData *) data {
-    uint8_t digest[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    return output;
-}
-
 + (BOOL) regexMatch : (NSString *) pattern : (NSString *) message : (NSError **) error {
     BOOL isMatch = false;
     NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern : pattern options : 0 error : error];
@@ -210,11 +165,67 @@
     return isMatch;
 }
 
-+ (double_t) MO2BU : (int64_t) mo {
-    return  mo / powl(10, 8);
+/**
+ * @author riven
+ * @param amountWithoutDecimals The amount without decimals, that must be a number smaller than LONG.MAX_VALUE
+ * @param decimals The decimals, that should be bigger than and equal to 0 and should be smaller than 19
+ * @return The amount with decimals, which means that amountWithDecimals * 10 ^ decimals
+ * @date 2018/12/13 16:00
+ */
++ (NSDecimalNumber *) unitWithDecimals : (NSString *)amountWithoutDecimals : (int) decimals {
+    if (decimals < 0 || decimals > 18) {
+        return nil;
+    }
+    NSString *regex = [NSString stringWithFormat: @"(^0(\\.[0-9]{0,%d}[1-9])?$)|(^[1-9][0-9]{0,%d}(\\.[0-9]{0,%d}[1-9])?$)", decimals - 1, 18 - decimals, decimals - 1];
+    NSError *error = nil;
+    BOOL match = [Tools regexMatch:regex :amountWithoutDecimals :&error];
+    if (![Tools isEmpty : error] || !match) {
+        return nil;
+    }
+    
+    NSDecimalNumber *uint = [NSDecimalNumber decimalNumberWithString:amountWithoutDecimals];
+    NSDecimalNumber *dec = [[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d",1]] decimalNumberByMultiplyingByPowerOf10: decimals];
+    
+    NSDecimalNumber *num = [uint decimalNumberByMultiplyingBy:dec];
+    if ([num compare: [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%lld",INT64_MAX]]] == NSOrderedDescending) {
+        return nil;
+    }
+    
+    return num;
 }
-+ (int64_t) BU2MO : (double_t) bu {
-    return bu * pow(10, 8);
+
+/**
+ * @author riven
+ * @param amountWithDecimals The amount without decimals
+ * @param decimals The decimals, that cannot be bigger than 18
+ * @return The amount with decimals, which means that amountWithDecimals * 10 ^ decimals, but should be bigger than LONG.MAX_VALUE
+ * @date 2018/12/13 16:00
+ */
++ (NSDecimalNumber *)unitWithoutDecimals : (NSString *)amountWithDecimals : (int) decimals {
+    if (decimals < 0 || decimals > 18) {
+        return nil;
+    }
+    NSString *regex = [NSString stringWithFormat: @"(^0?$)|(^[1-9][0-9]{0,18}?$)"];
+    NSError *error = nil;
+    BOOL match = [Tools regexMatch:regex :amountWithDecimals :&error];
+    if (![Tools isEmpty : error] || !match) {
+        return nil;
+    }
+    if ([amountWithDecimals compare: [NSString stringWithFormat: @"%lld", INT64_MAX]] > 0) {
+        return nil;
+    }
+    NSDecimalNumber *uint = [NSDecimalNumber decimalNumberWithString:amountWithDecimals];
+    NSDecimalNumber *dec = [[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d",1]] decimalNumberByMultiplyingByPowerOf10: decimals];
+    
+    NSDecimalNumber *num = [uint decimalNumberByDividingBy:dec];
+    return num;
+}
+
++ (NSDecimalNumber *) MO2BU : (NSString *) mo {
+    return  [Tools unitWithoutDecimals:mo :8];
+}
++ (NSDecimalNumber *) BU2MO : (NSString *) bu {
+    return  [Tools unitWithDecimals:bu :8];
 }
 
 + (NSString *)hexCharToBinary: (unichar) hexChar {

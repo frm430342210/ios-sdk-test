@@ -7,7 +7,7 @@
 //
 
 #import "OperationInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation OperationInfo
 + (NSDictionary *)modelCustomPropertyMapper {

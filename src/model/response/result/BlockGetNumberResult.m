@@ -7,7 +7,7 @@
 //
 
 #import "BlockGetNumberResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockGetNumberResult
 + (NSDictionary *)modelContainerPropertyGenericClass {

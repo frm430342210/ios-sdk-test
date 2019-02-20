@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenCheckValidResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenCheckValidResult
 + (NSDictionary *)modelCustomPropertyMapper {

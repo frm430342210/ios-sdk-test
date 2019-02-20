@@ -14,6 +14,7 @@
     NSData *_publicKey;
 }
 
+- (instancetype)initWithData : (NSData *)data;
 - (NSString *) getEncPrivateKey;
 - (NSString *) getEncPublicKey;
 - (NSString *) getEncAddress;
@@ -22,6 +23,7 @@
 
 + (NSString *) getEncPublicKey : (NSString *) privateKey;
 + (NSString *) getEncAddress : (NSString *) publicKey;
++ (NSString *) getEncAddressFromPrivateKey : (NSString *) privateKey;
 + (NSData *) sign : (NSData *) data : (NSString *) privateKey;
 + (BOOL) verify : (NSData *)signature : (NSData *) data : (NSString *) publicKey;
 + (BOOL) isPrivateKeyValid : (NSString *) privateKey;

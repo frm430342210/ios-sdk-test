@@ -7,7 +7,7 @@
 //
 
 #import "ContractAddressInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation ContractAddressInfo
 + (NSDictionary *)modelCustomPropertyMapper {

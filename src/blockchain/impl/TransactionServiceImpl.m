@@ -6,7 +6,7 @@
 //  Copyright © 2018 dxl. All rights reserved.
 //
 
-#import "Tools.h"
+#import "SDK.h"
 #import "General.h"
 #import "Constant.h"
 #import "http/Http.h"
@@ -21,7 +21,9 @@
 #import "TransactionServiceImpl.h"
 #import "LogServiceImpl.h"
 #import "TransactionSubmitHttpResponse.h"
-#import "YYModel.h"
+#import "TransactionTestRequest.h"
+#import "BlockGetNumberResponse.h"
+#import "Hash.h"
 
 @implementation TransactionServiceImpl
 
@@ -70,11 +72,11 @@
             @throw [[SDKException alloc] initWithCode : INVALID_CEILLEDGERSEQ_ERROR];
         }
         NSString *metadata = [transactionBuildBlobRequest getMetadata];
-        Transaction *transaction = [Transaction message];
         NSMutableArray<BaseOperation *> *operations = [transactionBuildBlobRequest getOperations];
         if ([Tools isEmpty : operations]) {
             @throw [[SDKException alloc] initWithCode : OPERATIONS_EMPTY_ERROR];
         }
+        Transaction *transaction = [Transaction message];
         [self buildOperation : operations : sourceAddress : &transaction];
         [transaction setSourceAddress : sourceAddress];
         [transaction setNonce : nonce];
@@ -83,18 +85,38 @@
         if (![Tools isEmpty : metadata]) {
             [transaction setMetadata : [metadata dataUsingEncoding : NSUTF8StringEncoding]];
         }
+        SDKConfigure *sdkConfigure = [SDK getConfigure];
+        int64_t chainId = [sdkConfigure getChainId];
+        if (chainId > 0) {
+            [transaction setChainId: chainId];
+        }
+        if (ceilLedgerSeq > 0) {
+            NSString *getNumberUrl = [[General sharedInstance] blockGetNumber];
+            NSData *result = [Http get: getNumberUrl];
+            BlockGetNumberResponse *blockGetNumberResponse = [BlockGetNumberResponse yy_modelWithJSON: result];
+            int32_t errorCode = blockGetNumberResponse.errorCode;
+            if (errorCode != 0) {
+                @throw [[SDKException alloc] initWithCode : INVALID_CEILLEDGERSEQ_ERROR];
+            }
+            int64_t blockNumber = blockGetNumberResponse.result.header.blockNumber;
+            int64_t realCeilLedgerSeq = blockNumber + ceilLedgerSeq;
+            if (realCeilLedgerSeq < 1) {
+                @throw [[SDKException alloc] initWithCode : INVALID_CEILLEDGERSEQ_ERROR];
+            }
+            [transaction setCeilLedgerSeq: realCeilLedgerSeq];
+        }
         // Serialization
         NSData *serialData = [transaction data];
         NSString *transactionBlob = [Tools dataToHexStr : serialData];
         transactionBuildBlobResult.transactionBlob = transactionBlob;
-        transactionBuildBlobResult.transactionHash = [Tools sha256 : serialData];
+        transactionBuildBlobResult.transactionHash = [Tools dataToHexStr: [Hash sha256: serialData]];
         [transactionBuildBlobResponse buildResponse:(SUCCESS) : transactionBuildBlobResult];
     }
     @catch(SDKException *sdkException) {
         [transactionBuildBlobResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : transactionBuildBlobResult];
     }
     @catch(NSException *exception) {
-        [transactionBuildBlobResponse buildResponse: (SYSTEM_ERROR) :(transactionBuildBlobResult)];
+        [transactionBuildBlobResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(transactionBuildBlobResult)];
     }
     return transactionBuildBlobResponse;
 }
@@ -127,18 +149,20 @@
         }
         NSData *blobData = [Tools hexStrToData : blob];
         NSError *error = nil;
-        Transaction *tran = [Transaction parseFromData : blobData error : &error];
-        if ([Tools isEmpty : tran] || ![Tools isEmpty : error]) {
+        Transaction *transaction = [Transaction parseFromData : blobData error : &error];
+        if ([Tools isEmpty : transaction] || ![Tools isEmpty : error]) {
             @throw [[SDKException alloc] initWithCode : INVALID_BLOB_ERROR];
         }
+        transactionParseBlobResult = (TransactionParseBlobResult *)[self transactionToInfo: transaction];
+        [transactionParseBlobResponse buildResponse:SUCCESS :transactionParseBlobResult];
     }
     @catch(SDKException *sdkException) {
-        [transactionParseBlobResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(transactionParseBlobResult)];
+        [transactionParseBlobResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : (transactionParseBlobResult)];
     }
     @catch(NSException *exception) {
-        [transactionParseBlobResponse buildResponse: (SYSTEM_ERROR) :(transactionParseBlobResult)];
+        [transactionParseBlobResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(transactionParseBlobResult)];
     }
-    return nil;
+    return transactionParseBlobResponse;
 }
 
 /**
@@ -182,13 +206,48 @@
         if (ceilLedgerSeq < 0) {
             @throw [[SDKException alloc] initWithCode : INVALID_CEILLEDGERSEQ_ERROR];
         }
-        //NSString *metadata = [transactionEvaluateFeeRequest getMetadata];
+        NSString *metadata = [transactionEvaluateFeeRequest getMetadata];
+        NSMutableArray *operations = [transactionEvaluateFeeRequest getOperations];
+        if ([Tools isEmpty : operations]) {
+            @throw [[SDKException alloc] initWithCode : OPERATIONS_EMPTY_ERROR];
+        }
+        Transaction *transaction = [Transaction message];
+        [self buildOperation : operations : sourceAddress : &transaction];
+        transaction.sourceAddress = sourceAddress;
+        transaction.nonce = nonce;
+        if (![Tools isEmpty: metadata]) {
+            transaction.metadata = [metadata dataUsingEncoding: NSUTF8StringEncoding];
+        }
+        if (ceilLedgerSeq > 0) {
+            NSString *getNumberUrl = [[General sharedInstance] blockGetNumber];
+            NSData *result = [Http get: getNumberUrl];
+            BlockGetNumberResponse *blockGetNumberResponse = [BlockGetNumberResponse yy_modelWithJSON: result];
+            int32_t errorCode = blockGetNumberResponse.errorCode;
+            if (errorCode != 0) {
+                @throw [[SDKException alloc] initWithCode : INVALID_CEILLEDGERSEQ_ERROR];
+            }
+            int64_t blockNumber = blockGetNumberResponse.result.header.blockNumber;
+            int64_t realCeilLedgerSeq = blockNumber + ceilLedgerSeq;
+            if (realCeilLedgerSeq < 1) {
+                @throw [[SDKException alloc] initWithCode : INVALID_CEILLEDGERSEQ_ERROR];
+            }
+            [transaction setCeilLedgerSeq: realCeilLedgerSeq];
+        }
+        TransactionInfo *transactionInfo = [self transactionToInfo: transaction];
+        TransactionItem *transactionItem = [TransactionItem new];
+        transactionItem.transactionJson = transactionInfo;
+        TransactionTestRequest *transactionTestRequest = [TransactionTestRequest new];
+        [transactionTestRequest addTransactionItem:transactionItem];
+        
+        NSString *evaluationFeeUrl = [[General sharedInstance] transactionEvaluationFeeUrl];
+        NSData *result = [Http post : evaluationFeeUrl : [transactionTestRequest yy_modelToJSONString]];
+        transactionEvaluateFeeResponse = [TransactionEvaluateFeeResponse yy_modelWithJSON : result];
     }
     @catch(SDKException *sdkException) {
-        [transactionEvaluateFeeResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(transactionEvaluateFeeResult)];
+        [transactionEvaluateFeeResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(transactionEvaluateFeeResult)];
     }
     @catch(NSException *exception) {
-        [transactionEvaluateFeeResponse buildResponse: (SYSTEM_ERROR) :(transactionEvaluateFeeResult)];
+        [transactionEvaluateFeeResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(transactionEvaluateFeeResult)];
     }
     return transactionEvaluateFeeResponse;
 }
@@ -224,13 +283,14 @@
         if ([Tools isEmpty : tran] || ![Tools isEmpty : error]) {
             @throw [[SDKException alloc] initWithCode : INVALID_BLOB_ERROR];
         }
-        NSLog(@"%@", tran);
         NSMutableArray<NSString *> *privateKeys = [transactionSignRequest getPrivateKeys];
-        
+        if ([Tools isEmpty : privateKeys]) {
+            @throw [[SDKException alloc] initWithCode : PRIVATEKEY_NULL_ERROR];
+        }
         NSMutableArray<SignatureInfo *> *signatures = [[NSMutableArray alloc] init];
         for (NSString *privateKey in privateKeys) {
             if (![Tools isPrivateKeyValid : privateKey]) {
-                @throw [[SDKException alloc] initWithCode : PRIVATEKEY_NULL_ERROR];
+                @throw [[SDKException alloc] initWithCode : PRIVATEKEY_ONE_ERROR];
             }
             SignatureInfo *signatureInfo = [SignatureInfo new];
             signatureInfo.signData = [Tools sign : privateKey : blobData];
@@ -241,7 +301,7 @@
         [transactionSignResponse buildResponse:(SUCCESS) : transactionSignResult];
     }
     @catch(SDKException *sdkException) {
-        [transactionSignResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : transactionSignResult];
+        [transactionSignResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : transactionSignResult];
     }
     return transactionSignResponse;
 }
@@ -365,7 +425,7 @@
         [transactionGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(transactionGetInfoResult)];
     }
     @catch(NSException *exception) {
-        [transactionGetInfoResponse buildResponse: (SYSTEM_ERROR) :(transactionGetInfoResult)];
+        [transactionGetInfoResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(transactionGetInfoResult)];
     }
     return transactionGetInfoResponse;
 }
@@ -378,10 +438,11 @@
  @param sourceAddress The source account to start a transaction
  @param transaction The  transaction to be sent
  */
-- (void)buildOperation : (NSMutableArray<BaseOperation *> *)operations : (NSString *) sourceAddress : (Transaction **)transaction {
+- (void) buildOperation : (NSMutableArray<BaseOperation *> *)operations : (NSString *) sourceAddress : (Transaction **)transaction {
     for (BaseOperation *baseOperation in operations) {
         Operation *operation = nil;
-        switch ([baseOperation getOperationType]) {
+        OperationType operationType = [baseOperation getOperationType];
+        switch (operationType) {
             case ACCOUNT_ACTIVATE:
                 operation = [AccountServiceImpl activate : (AccountActivateOperation *)baseOperation : sourceAddress];
                 break;
@@ -439,7 +500,247 @@
         }
         [(*transaction).operationsArray addObject: operation];
     }
-    return;
+}
+
+- (TransactionInfo *) transactionToInfo: (Transaction *)transaction {
+    if ([Tools isEmpty: transaction] || transaction.operationsArray_Count == 0) {
+        return nil;
+    }
+    TransactionInfo *transactionInfo = [TransactionInfo new];
+    
+    transactionInfo.sourceAddress = transaction.sourceAddress;
+    transactionInfo.nonce = transaction.nonce;
+    if (![Tools isEmpty: transaction.metadata]) {
+        transactionInfo.metadata = [[NSString alloc] initWithData:transaction.metadata encoding:transaction.metadata.length];
+    }
+    transactionInfo.ceilLedgerSeq = transaction.ceilLedgerSeq;
+    transactionInfo.feeLimit = transaction.feeLimit;
+    transactionInfo.gasPrice = transaction.gasPrice;
+    transactionInfo.chainId = transaction.chainId;
+    
+    NSMutableArray *operations = [NSMutableArray new];
+    for (Operation *operation in transaction.operationsArray) {
+        OperationInfo *operationInfo = [OperationInfo new];
+        Operation_Type type = operation.type;
+        operationInfo.type = type;
+        operationInfo.sourceAddress = operation.sourceAddress;
+        operationInfo.metadata = [[NSString alloc] initWithData:operation.metadata encoding:operation.metadata.length];
+        switch (type) {
+            case Operation_Type_CreateAccount: {
+                AccountActiviateInfo *accountActivateInfo = [AccountActiviateInfo new];
+                accountActivateInfo.destAddress = operation.createAccount.destAddress;
+                accountActivateInfo.initBalance = operation.createAccount.initBalance;
+                if ([Tools isEmpty: operation.createAccount.contract]) {
+                    ContractInfo *contractInfo = [ContractInfo new];
+                    contractInfo.payload = operation.createAccount.contract.payload;
+                    accountActivateInfo.contract = contractInfo;
+                }
+                accountActivateInfo.input = operation.createAccount.initInput;
+                operationInfo.createAccount = accountActivateInfo;
+            }
+                break;
+            case Operation_Type_IssueAsset: {
+                AssetIssueInfo *assetIssueInfo = [AssetIssueInfo new];
+                assetIssueInfo.code = operation.issueAsset.code;
+                assetIssueInfo.amount = operation.issueAsset.amount;
+                operationInfo.issueAsset = assetIssueInfo;
+            }
+                break;
+            case Operation_Type_PayAsset: {
+                AssetSendInfo *assetSendInfo = [AssetSendInfo new];
+                assetSendInfo.destAddress = operation.payAsset.destAddress;
+                assetSendInfo.input = operation.payAsset.input;
+                AssetInfo *assetInfo = [AssetInfo new];
+                AssetKeyInfo *assetKeyInfo = [AssetKeyInfo new];
+                assetKeyInfo.issuer = operation.payAsset.asset.key.issuer;
+                assetKeyInfo.code = operation.payAsset.asset.key.code;
+                assetInfo.key = assetKeyInfo;
+                assetInfo.amount = operation.payAsset.asset.amount;
+                assetSendInfo.asset = assetInfo;
+                operationInfo.sendAsset = assetSendInfo;
+            }
+                break;
+            case Operation_Type_SetMetadata: {
+                AccountSetMetadataInfo *accountSetMetadataInfo = [AccountSetMetadataInfo new];
+                accountSetMetadataInfo.key = operation.setMetadata.key;
+                accountSetMetadataInfo.value = operation.setMetadata.value;
+                accountSetMetadataInfo.version = operation.setMetadata.version;
+                accountSetMetadataInfo.deleteFlag = operation.setMetadata.deleteFlag;
+                operationInfo.setMetadata = accountSetMetadataInfo;
+            }
+                break;
+            case Operation_Type_PayCoin: {
+                BUSendInfo *buSendInfo = [BUSendInfo new];
+                buSendInfo.destAddress = operation.payCoin.destAddress;
+                buSendInfo.amount = operation.payCoin.amount;
+                buSendInfo.input = operation.payCoin.input;
+                operationInfo.sendBU = buSendInfo;
+            }
+                break;
+            case Operation_Type_Log: {
+                LogInfo *logInfo = [LogInfo new];
+                logInfo.topic = operation.log.topic;
+                logInfo.datas = [operation.log.datasArray copy];
+                operationInfo.log = logInfo;
+            }
+                break;
+            case Operation_Type_SetPrivilege: {
+                AccountSetPrivilegeInfo *accountSetPrivilegeInfo = [AccountSetPrivilegeInfo new];
+                accountSetPrivilegeInfo.masterWeight = operation.setPrivilege.masterWeight;
+                accountSetPrivilegeInfo.txThreshold = operation.setPrivilege.txThreshold;
+                if (operation.setPrivilege.signersArray_Count > 0) {
+                    NSMutableArray *signers = [NSMutableArray new];
+                    for (Signer *signer in operation.setPrivilege.signersArray) {
+                        SignerInfo *signerInfo = [SignerInfo new];
+                        signerInfo.address = signer.address;
+                        signerInfo.weight = signer.weight;
+                        [signers addObject: signerInfo];
+                    }
+                    accountSetPrivilegeInfo.signers = [signers copy];
+                }
+                if (operation.setPrivilege.typeThresholdsArray_Count > 0) {
+                    NSMutableArray *typeThresholds = [NSMutableArray new];
+                    for (OperationTypeThreshold *operationTypeThreshold in operation.setPrivilege.typeThresholdsArray) {
+                        TypeThreshold *typeThreshold = [TypeThreshold new];
+                        typeThreshold.type = operationTypeThreshold.type;
+                        typeThreshold.threshold = operationTypeThreshold.threshold;
+                        [typeThresholds addObject: typeThreshold];
+                    }
+                    accountSetPrivilegeInfo.typeThresholds = typeThresholds;
+                }
+                operationInfo.setPrivilege = accountSetPrivilegeInfo;
+            }
+                break;
+            default:
+                @throw [[SDKException alloc] initWithCode : OPERATIONS_ONE_ERROR];
+        }
+        [operations addObject: operationInfo];
+    }
+    transactionInfo.operations = operations;
+    return transactionInfo;
+}
+
+- (OperationInfo *) setOperation: (OperationType)operationType : (Operation *)operation {
+    if ([Tools isEmpty: operation]) {
+        return nil;
+    }
+    
+    OperationInfo *operationInfo = [OperationInfo new];
+    operationInfo.type = operation.type;
+    operationInfo.sourceAddress = operation.sourceAddress;
+    if (![Tools isEmpty: operation.metadata]) {
+        operationInfo.metadata = [[NSString alloc] initWithData:operation.metadata encoding:NSUTF8StringEncoding];
+    }
+    
+    switch (operationType) {
+        case ACCOUNT_ACTIVATE: {
+            AccountActiviateInfo *accountActivateInfo = [AccountActiviateInfo new];
+            accountActivateInfo.destAddress = operation.createAccount.destAddress;
+            accountActivateInfo.initBalance = operation.createAccount.initBalance;
+            operationInfo.createAccount = accountActivateInfo;
+        }
+            break;
+        case ACCOUNT_SET_METADATA: {
+            AccountSetMetadataInfo *accountSetMetadataInfo = [AccountSetMetadataInfo new];
+            accountSetMetadataInfo.key = operation.setMetadata.key;
+            accountSetMetadataInfo.value = operation.setMetadata.value;
+            accountSetMetadataInfo.version = operation.setMetadata.version;
+            accountSetMetadataInfo.deleteFlag = operation.setMetadata.deleteFlag;
+            operationInfo.setMetadata = accountSetMetadataInfo;
+        }
+            break;
+        case ACCOUNT_SET_PRIVILEGE: {
+            AccountSetPrivilegeInfo *accountSetPrivilegeInfo = [AccountSetPrivilegeInfo new];
+            accountSetPrivilegeInfo.masterWeight = operation.setPrivilege.masterWeight;
+            accountSetPrivilegeInfo.txThreshold = operation.setPrivilege.txThreshold;
+            if (operation.setPrivilege.signersArray_Count > 0) {
+                NSMutableArray *signers = [NSMutableArray new];
+                for (Signer *signer in operation.setPrivilege.signersArray) {
+                    SignerInfo *signerInfo = [SignerInfo new];
+                    signerInfo.address = signer.address;
+                    signerInfo.weight = signer.weight;
+                    [signers addObject: signerInfo];
+                }
+                accountSetPrivilegeInfo.signers = [signers copy];
+            }
+            if (operation.setPrivilege.typeThresholdsArray_Count > 0) {
+                NSMutableArray *typeThresholds = [NSMutableArray new];
+                for (OperationTypeThreshold *operationTypeThreshold in operation.setPrivilege.typeThresholdsArray) {
+                    TypeThreshold *typeThreshold = [TypeThreshold new];
+                    typeThreshold.type = operationTypeThreshold.type;
+                    typeThreshold.threshold = operationTypeThreshold.threshold;
+                    [typeThresholds addObject: typeThreshold];
+                }
+                accountSetPrivilegeInfo.typeThresholds = typeThresholds;
+            }
+            operationInfo.setPrivilege = accountSetPrivilegeInfo;
+        }
+            break;
+        case ASSET_ISSUE: {
+            AssetIssueInfo *assetIssueInfo = [AssetIssueInfo new];
+            assetIssueInfo.code = operation.issueAsset.code;
+            assetIssueInfo.amount = operation.issueAsset.amount;
+            operationInfo.issueAsset = assetIssueInfo;
+        }
+            break;
+        case CONTRACT_INVOKE_BY_ASSET:
+        case ASSET_SEND: {
+            AssetSendInfo *assetSendInfo = [AssetSendInfo new];
+            assetSendInfo.destAddress = operation.payAsset.destAddress;
+            assetSendInfo.input = operation.payAsset.input;
+            AssetInfo *assetInfo = [AssetInfo new];
+            AssetKeyInfo *assetKeyInfo = [AssetKeyInfo new];
+            assetKeyInfo.issuer = operation.payAsset.asset.key.issuer;
+            assetKeyInfo.code = operation.payAsset.asset.key.code;
+            assetInfo.key = assetKeyInfo;
+            assetInfo.amount = operation.payAsset.asset.amount;
+            assetSendInfo.asset = assetInfo;
+            operationInfo.sendAsset = assetSendInfo;
+        }
+            break;
+        case BU_SEND: {
+            BUSendInfo *buSendInfo = [BUSendInfo new];
+            buSendInfo.destAddress = operation.payCoin.destAddress;
+            buSendInfo.amount = operation.payCoin.amount;
+            operationInfo.sendBU = buSendInfo;
+        }
+            break;
+        case CONTRACT_CREATE:
+        case TOKEN_ISSUE: {
+            AccountActiviateInfo *accountActivateInfo = [AccountActiviateInfo new];
+            accountActivateInfo.destAddress = operation.createAccount.destAddress;
+            accountActivateInfo.initBalance = operation.createAccount.initBalance;
+            ContractInfo *contractInfo = [ContractInfo new];
+            contractInfo.payload = operation.createAccount.contract.payload;
+            accountActivateInfo.contract = contractInfo;
+            accountActivateInfo.input = operation.createAccount.initInput;
+            operationInfo.createAccount = accountActivateInfo;
+        }
+            break;
+        case TOKEN_TRANSFER:
+        case TOKEN_TRANSFER_FROM:
+        case TOKEN_APPROVE:
+        case TOKEN_ASSIGN:
+        case TOKEN_CHANGE_OWNER:
+        case CONTRACT_INVOKE_BY_BU: {
+            BUSendInfo *buSendInfo = [BUSendInfo new];
+            buSendInfo.destAddress = operation.payCoin.destAddress;
+            buSendInfo.amount = operation.payCoin.amount;
+            buSendInfo.input = operation.payCoin.input;
+            operationInfo.sendBU = buSendInfo;
+        }
+            break;
+        case LOG_CREATE: {
+            LogInfo *logInfo = [LogInfo new];
+            logInfo.topic = operation.log.topic;
+            logInfo.datas = [operation.log.datasArray copy];
+        }
+            break;
+        default:
+            @throw [[SDKException alloc] initWithCode : OPERATIONS_ONE_ERROR];
+            break;
+    }
+    return operationInfo;
 }
 
 + (TransactionGetInfoResponse *) getTransactionInfo : (NSString *) hash {

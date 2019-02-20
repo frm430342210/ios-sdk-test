@@ -7,7 +7,7 @@
 //
 
 #import "TransactionBuildBlobResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionBuildBlobResult
 + (NSDictionary *)modelCustomPropertyMapper {

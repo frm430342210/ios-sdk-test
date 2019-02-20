@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenGetSymbolResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenGetSymbolResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

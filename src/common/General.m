@@ -8,7 +8,9 @@
 
 #import "General.h"
 #import "Tools.h"
+#import "SDK.h"
 
+static NSString *_url = nil;
 @implementation General
 
 static General *_general = nil;
@@ -18,21 +20,16 @@ static General *_general = nil;
     dispatch_once(&onceToken, ^{
         _general = [[super allocWithZone:NULL] init] ;
     }) ;
-    return _general ;
+    _url = [SDK getUrl];
+    return _general;
 }
 
-+ (id) allocWithZone : (struct _NSZone *)zone
-{
++ (id) allocWithZone : (struct _NSZone *)zone {
     return [General sharedInstance] ;
 }
 
-- (id) copyWithZone : (struct _NSZone *)zone
-{
+- (id) copyWithZone : (struct _NSZone *)zone {
     return [General sharedInstance] ;
-}
-
-- (void) setUrl : (NSString *) url {
-    _url = url;
 }
 
 - (NSString *) getUrl {
@@ -61,7 +58,7 @@ static General *_general = nil;
 - (NSString *) contractCallUrl {
     return [NSString stringWithFormat : @"%@/callContract", _url];
 }
-- (NSString *) transactionEvaluationFee {
+- (NSString *) transactionEvaluationFeeUrl {
     return [NSString stringWithFormat : @"%@/testTransaction", _url];
 }
 - (NSString *) transactionSubmitUrl {

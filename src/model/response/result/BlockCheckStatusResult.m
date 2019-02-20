@@ -7,7 +7,7 @@
 //
 
 #import "BlockCheckStatusResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockCheckStatusResult
 + (NSDictionary *)modelCustomPropertyMapper {

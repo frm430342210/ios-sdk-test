@@ -7,7 +7,7 @@
 //
 
 #import "Ctp10TokenGetDecimalsResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Ctp10TokenGetDecimalsResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

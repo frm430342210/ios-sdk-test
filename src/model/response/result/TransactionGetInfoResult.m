@@ -7,7 +7,7 @@
 //
 
 #import "TransactionGetInfoResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionGetInfoResult
 + (NSDictionary *)modelCustomPropertyMapper {

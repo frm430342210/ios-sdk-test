@@ -7,17 +7,20 @@
 //
 
 #import "TransactionParseBlobResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionParseBlobResult
 + (NSDictionary *)modelCustomPropertyMapper {
     // value should be Class or Class name.
     return @{@"sourceAddress" : @"source_address",
              @"feeLimit" : @"fee_limit",
-             @"gasPrice" : @"gas_price"};
+             @"gasPrice" : @"gas_price",
+             @"ceilLedgerSeq" : @"ceil_ledger_seq",
+             @"chainId" : @"chain_id"
+             };
 }
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
-    return @{@"operations" : [OperationFormat class]};
+    return @{@"operations" : [OperationInfo class]};
 }
 @end

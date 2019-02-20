@@ -15,7 +15,7 @@
 #import "http/Http.h"
 #import "SDKError.h"
 #import "SDKException.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockServiceImpl
 /**
@@ -40,10 +40,10 @@
         blockGetNumberResponse = [BlockGetNumberResponse yy_modelWithJSON: result];
     }
     @catch(SDKException *sdkException) {
-        [blockGetNumberResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetNumberResult];
+        [blockGetNumberResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetNumberResult];
     }
     @catch(NSException *exception) {
-        [blockGetNumberResponse buildResponse: (SYSTEM_ERROR) :(blockGetNumberResult)];
+        [blockGetNumberResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetNumberResult)];
     }
     return blockGetNumberResponse;
 }
@@ -80,10 +80,10 @@
         [blockCheckStatusResponse buildResponse: (SUCCESS) :(blockCheckStatusResult)];
     }
     @catch(SDKException *sdkException) {
-        [blockCheckStatusResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockCheckStatusResult];
+        [blockCheckStatusResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockCheckStatusResult];
     }
     @catch(NSException *exception) {
-        [blockCheckStatusResponse buildResponse: (SYSTEM_ERROR) :(blockCheckStatusResult)];
+        [blockCheckStatusResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockCheckStatusResult)];
     }
     return blockCheckStatusResponse;
 }
@@ -125,10 +125,10 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [blockGetTransactionsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetTransactionsResult];
+        [blockGetTransactionsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetTransactionsResult];
     }
     @catch(NSException *exception) {
-        [blockGetTransactionsResponse buildResponse: (SYSTEM_ERROR) :(blockGetTransactionsResult)];
+        [blockGetTransactionsResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetTransactionsResult)];
     }
     return blockGetTransactionsResponse;
 }
@@ -172,10 +172,10 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [blockGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetInfoResult];
+        [blockGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetInfoResult];
     }
     @catch(NSException *exception) {
-        [blockGetInfoResponse buildResponse: (SYSTEM_ERROR) :(blockGetInfoResult)];
+        [blockGetInfoResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetInfoResult)];
     }
     return blockGetInfoResponse;
 }
@@ -206,10 +206,10 @@
         blockGetLatestInfoResponse = [BlockGetLatestInfoResponse yy_modelWithJSON: result];
     }
     @catch(SDKException *sdkException) {
-        [blockGetLatestInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetLatestInfoResult];
+        [blockGetLatestInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetLatestInfoResult];
     }
     @catch(NSException *exception) {
-        [blockGetLatestInfoResponse buildResponse: (SYSTEM_ERROR) :(blockGetLatestInfoResult)];
+        [blockGetLatestInfoResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetLatestInfoResult)];
     }
     return blockGetLatestInfoResponse;
 }
@@ -251,10 +251,10 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [blockGetValidatorsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetValidatorsResult];
+        [blockGetValidatorsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetValidatorsResult];
     }
     @catch(NSException *exception) {
-        [blockGetValidatorsResponse buildResponse: (SYSTEM_ERROR) :(blockGetValidatorsResult)];
+        [blockGetValidatorsResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetValidatorsResult)];
     }
     return blockGetValidatorsResponse;
 }
@@ -283,10 +283,10 @@
         blockGetLatestValidatorsResponse = [BlockGetLatestValidatorsResponse yy_modelWithJSON: result];
     }
     @catch(SDKException *sdkException) {
-        [blockGetLatestValidatorsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetLatestValidatorsResult];
+        [blockGetLatestValidatorsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetLatestValidatorsResult];
     }
     @catch(NSException *exception) {
-        [blockGetLatestValidatorsResponse buildResponse: (SYSTEM_ERROR) :(blockGetLatestValidatorsResult)];
+        [blockGetLatestValidatorsResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetLatestValidatorsResult)];
     }
     return blockGetLatestValidatorsResponse;
 }
@@ -340,13 +340,14 @@
             [rewardResults addObject: validatorRewardInfo];
         }
         blockGetRewardResult.rewardResults = [rewardResults copy];
+        blockGetRewardResult.blockReward = blockRewardJsonResponse.result.blockReward;
         [blockGetRewardResponse buildResponse: (SUCCESS) :(blockGetRewardResult)];
     }
     @catch(SDKException *sdkException) {
-        [blockGetRewardResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetRewardResult];
+        [blockGetRewardResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetRewardResult];
     }
     @catch(NSException *exception) {
-        [blockGetRewardResponse buildResponse: (SYSTEM_ERROR) :(blockGetRewardResult)];
+        [blockGetRewardResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetRewardResult)];
     }
     return blockGetRewardResponse;
 }
@@ -388,13 +389,14 @@
             [rewardResults addObject: validatorRewardInfo];
         }
         blockGetLatestRewardResult.rewardResults = [rewardResults copy];
+        blockGetLatestRewardResult.blockReward = blockRewardJsonResponse.result.blockReward;
         [blockGetLatestRewardResponse buildResponse: (SUCCESS) :(blockGetLatestRewardResult)];
     }
     @catch(SDKException *sdkException) {
-        [blockGetLatestRewardResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetLatestRewardResult];
+        [blockGetLatestRewardResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetLatestRewardResult];
     }
     @catch(NSException *exception) {
-        [blockGetLatestRewardResponse buildResponse: (SYSTEM_ERROR) :(blockGetLatestRewardResult)];
+        [blockGetLatestRewardResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetLatestRewardResult)];
     }
     return blockGetLatestRewardResponse;
 }
@@ -440,10 +442,10 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [blockGetFeesResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetFeesResult];
+        [blockGetFeesResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetFeesResult];
     }
     @catch(NSException *exception) {
-        [blockGetFeesResponse buildResponse: (SYSTEM_ERROR) :(blockGetFeesResult)];
+        [blockGetFeesResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetFeesResult)];
     }
     return blockGetFeesResponse;
 }
@@ -477,10 +479,10 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [blockGetLatestFeesResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : blockGetLatestFeesResult];
+        [blockGetLatestFeesResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : blockGetLatestFeesResult];
     }
     @catch(NSException *exception) {
-        [blockGetLatestFeesResponse buildResponse: (SYSTEM_ERROR) :(blockGetLatestFeesResult)];
+        [blockGetLatestFeesResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(blockGetLatestFeesResult)];
     }
     return blockGetLatestFeesResponse;
 }

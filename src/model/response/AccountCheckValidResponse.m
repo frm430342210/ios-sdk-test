@@ -7,7 +7,7 @@
 //
 
 #import "AccountCheckValidResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountCheckValidResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

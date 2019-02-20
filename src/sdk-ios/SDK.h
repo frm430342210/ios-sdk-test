@@ -29,12 +29,14 @@
 #import "ContractCreateOperation.h"
 #import "ContractInvokeByAssetOperation.h"
 #import "ContractInvokeByBUOperation.h"
+#import "LogCreateOperation.h"
+#import "SDKConfigure.h"
 #import "Tools.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 #import "Mnemonic.h"
 #import "KeyStore.h"
-#import "KeyStoreValue.h"
-#import "ScryptParams.h"
+#import "KeyStoreEty.h"
+#import "ScryptParamsEty.h"
 #import "Keypair.h"
 
 @interface SDK : NSObject
@@ -42,6 +44,9 @@
 + (id) allocWithZone : (struct _NSZone *)zone;
 - (id) copyWithZone : (struct _NSZone *)zone;
 - (instancetype) setUrl : (NSString *) url;
++ (NSString *) getUrl;
+- (instancetype) setConfigure : (SDKConfigure *) sdkConfigure;
++ (SDKConfigure *) getConfigure;
 
 - (AccountService *) getAccountService;
 - (AssetService *) getAssetService;

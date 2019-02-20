@@ -13,7 +13,7 @@
 #import "Http.h"
 #import "SDKError.h"
 #import "SDKException.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AssetServiceImpl
 /**
@@ -71,7 +71,7 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [assetGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(assetGetInfoResult)];
+        [assetGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(assetGetInfoResult)];
     }
     return assetGetInfoResponse;
 }
@@ -147,8 +147,7 @@
     if (![Tools isAddressValid : destAddress]) {
         @throw [[SDKException alloc] initWithCode : INVALID_DESTADDRESS_ERROR];
     }
-    BOOL isNotValid = (![Tools isEmpty : sourceAddress] && [sourceAddress isEqualToString : destAddress]) ||
-    ([Tools isEmpty : sourceAddress] && [transSourceAddress isEqualToString : destAddress]);
+    BOOL isNotValid = (![Tools isEmpty : sourceAddress] && [sourceAddress isEqualToString : destAddress]) || [transSourceAddress isEqualToString : destAddress];
     if (isNotValid) {
         @throw [[SDKException alloc] initWithCode : SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR];
     }

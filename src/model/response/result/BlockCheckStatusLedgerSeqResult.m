@@ -7,7 +7,7 @@
 //
 
 #import "BlockCheckStatusLedgerSeqResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockCheckStatusLedgerSeqResult
 + (NSDictionary *)modelCustomPropertyMapper {

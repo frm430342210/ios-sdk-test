@@ -343,6 +343,7 @@ typedef GPB_ENUM(LedgerHeader_FieldNumber) {
   LedgerHeader_FieldNumber_ValidatorsHash = 9,
   LedgerHeader_FieldNumber_FeesHash = 10,
   LedgerHeader_FieldNumber_Reserve = 11,
+  LedgerHeader_FieldNumber_ChainId = 12,
 };
 
 @interface LedgerHeader : GPBMessage
@@ -369,6 +370,8 @@ typedef GPB_ENUM(LedgerHeader_FieldNumber) {
 @property(nonatomic, readwrite, copy, null_resettable) NSData *feesHash;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *reserve;
+
+@property(nonatomic, readwrite) int64_t chainId;
 
 @end
 
@@ -675,6 +678,7 @@ typedef GPB_ENUM(Transaction_FieldNumber) {
   Transaction_FieldNumber_CeilLedgerSeq = 5,
   Transaction_FieldNumber_Metadata = 6,
   Transaction_FieldNumber_OperationsArray = 7,
+  Transaction_FieldNumber_ChainId = 8,
 };
 
 @interface Transaction : GPBMessage
@@ -694,6 +698,8 @@ typedef GPB_ENUM(Transaction_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<Operation*> *operationsArray;
 /** The number of items in @c operationsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger operationsArray_Count;
+
+@property(nonatomic, readwrite) int64_t chainId;
 
 @end
 

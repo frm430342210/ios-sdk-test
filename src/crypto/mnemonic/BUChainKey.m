@@ -113,7 +113,6 @@
             return nil;
         }
     }
-    NSLog(@"%@", [Tools dataToHexStr:[kc privateKey]]);
     return kc;
 }
 
@@ -127,11 +126,6 @@
         [data appendData:self.privateKey];
     } else {
         [data appendData:self.publicKey];
-        const uint8_t *pubKey = (const uint8_t *)_publicKey.bytes;
-        for (int32_t i = 0; i < _publicKey.length; i++) {
-            printf("%d ", pubKey[i]);
-        }
-        printf("\n");
     }
     
     BUChainKey* derivedKeychain = [[BUChainKey alloc] init];

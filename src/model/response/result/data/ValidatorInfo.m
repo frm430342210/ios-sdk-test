@@ -7,7 +7,7 @@
 //
 
 #import "ValidatorInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation ValidatorInfo
 + (NSDictionary *)modelCustomPropertyMapper {

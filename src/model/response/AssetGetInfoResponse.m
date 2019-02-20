@@ -7,7 +7,7 @@
 //
 
 #import "AssetGetInfoResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AssetGetInfoResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

@@ -19,8 +19,9 @@
 + (NSString *) dataToHexStr : (NSData *) data;
 + (NSString *) generateHashHex : (NSData *) data;
 + (NSArray *) dataToBitArray : (NSData *)hexData;
-+ (NSString*) sha256 : (NSData *) data;
 + (BOOL) regexMatch : (NSString *) pattern : (NSString *) message : (NSError **) error;
-+ (int64_t) BU2MO : (double_t) mo;
-+ (double_t) MO2BU : (int64_t) bu;
++ (NSDecimalNumber *)unitWithoutDecimals : (NSString *)unitWithDecimals : (int) decimals;
++ (NSDecimalNumber *) unitWithDecimals : (NSString *)unitWithoutDecimals : (int) decimals;
++ (NSDecimalNumber *) MO2BU : (NSString *) mo;
++ (NSDecimalNumber *) BU2MO : (NSString *) bu;
 @end

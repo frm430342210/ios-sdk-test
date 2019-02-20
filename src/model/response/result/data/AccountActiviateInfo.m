@@ -7,7 +7,7 @@
 //
 
 #import "AccountActiviateInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountActiviateInfo
 + (NSDictionary *)modelCustomPropertyMapper {

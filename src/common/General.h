@@ -8,21 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface General : NSObject {
-@private
-    NSString *_url;
-}
+@interface General : NSObject
 + (instancetype) sharedInstance;
 + (id) allocWithZone : (struct _NSZone *)zone;
 - (id) copyWithZone : (struct _NSZone *)zone;
-- (void) setUrl : (NSString *) url;
 - (NSString *) getUrl;
 - (NSString *) accountGetInfoUrl : (NSString *) address;
 - (NSString *) accountGetAssetsUrl : (NSString *) address;
 - (NSString *) accountGetMetadataUrl : (NSString *) address : (NSString *) key;
 - (NSString *) assetGetUrl : (NSString *) address : (NSString *)code : (NSString *) issuer;
 - (NSString *) contractCallUrl;
-- (NSString *) transactionEvaluationFee;
+- (NSString *) transactionEvaluationFeeUrl;
 - (NSString *) transactionSubmitUrl;
 - (NSString *) transactionGetInfoUrl : (NSString *) hash;
 - (NSString *) blockGetNumber;

@@ -7,7 +7,7 @@
 //
 
 #import "Priv.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Priv
 + (NSDictionary *)modelCustomPropertyMapper {
@@ -17,6 +17,6 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     // value should be Class or Class name.
     return @{@"signers" : [SignerInfo class],
-             @"threshold" : Threshold.class};
+             @"thresholds" : Threshold.class};
 }
 @end

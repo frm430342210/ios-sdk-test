@@ -7,7 +7,7 @@
 //
 
 #import "TriggerTransaction.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TriggerTransaction
 + (NSDictionary *)modelCustomPropertyMapper {

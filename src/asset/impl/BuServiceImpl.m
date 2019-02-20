@@ -39,8 +39,7 @@
     if (![Tools isAddressValid : destAddress]) {
         @throw [[SDKException alloc] initWithCode : INVALID_DESTADDRESS_ERROR];
     }
-    BOOL isNotValid = (![Tools isEmpty : sourceAddress] && [sourceAddress isEqualToString : destAddress]) ||
-    ([Tools isEmpty : sourceAddress] && [transSourceAddress isEqualToString : destAddress]);
+    BOOL isNotValid = (![Tools isEmpty : sourceAddress] && [sourceAddress isEqualToString : destAddress]) || [transSourceAddress isEqualToString : destAddress];
     if (isNotValid) {
         @throw [[SDKException alloc] initWithCode : SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR];
     }

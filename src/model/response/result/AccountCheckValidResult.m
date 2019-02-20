@@ -7,7 +7,7 @@
 //
 
 #import "AccountCheckValidResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountCheckValidResult
 + (NSDictionary *)modelCustomPropertyMapper {

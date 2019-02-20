@@ -7,7 +7,7 @@
 //
 
 #import "Threshold.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation Threshold
 + (NSDictionary *)modelCustomPropertyMapper {

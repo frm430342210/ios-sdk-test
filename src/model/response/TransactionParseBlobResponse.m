@@ -7,7 +7,7 @@
 //
 
 #import "TransactionParseBlobResponse.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation TransactionParseBlobResponse
 + (NSDictionary *)modelContainerPropertyGenericClass {

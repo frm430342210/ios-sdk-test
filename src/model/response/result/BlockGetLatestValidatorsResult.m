@@ -7,7 +7,7 @@
 //
 
 #import "BlockGetLatestValidatorsResult.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation BlockGetLatestValidatorsResult
 + (NSDictionary *)modelContainerPropertyGenericClass {

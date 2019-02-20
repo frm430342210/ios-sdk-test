@@ -7,7 +7,7 @@
 //
 
 #import "AccountSetPrivilegeInfo.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountSetPrivilegeInfo
 + (NSDictionary *)modelCustomPropertyMapper {

@@ -7,15 +7,21 @@
 //
 
 #import "Http.h"
-#import "Tools.h"
+#import "SDK.h"
 #import "SDKError.h"
 #import "SDKException.h"
 
 @implementation Http
 + (NSData *) get : (NSString *) url {
+    int64_t timeOut = 15;
+    SDKConfigure *sdkConfigure = [SDK getConfigure];
+    int64_t timeOutConf = [sdkConfigure getTimeOut];
+    if (timeOutConf > 0) {
+        timeOut = timeOutConf;
+    }
     NSURL *nsUrl = [NSURL URLWithString : url];
     // url转化为一个请求
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL : nsUrl cachePolicy : NSURLRequestReloadIgnoringLocalCacheData timeoutInterval : 15];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL : nsUrl cachePolicy : NSURLRequestReloadIgnoringLocalCacheData timeoutInterval : timeOut];
     // 设置请求方法
     [request setHTTPMethod : @"GET"];
     // 同步执行Http请求，获取返回数据
@@ -32,9 +38,15 @@
 }
 
 + (NSData *) post : (NSString *)url : (NSString *)body {
+    int64_t timeOut = 15;
+    SDKConfigure *sdkConfigure = [SDK getConfigure];
+    int64_t timeOutConf = [sdkConfigure getTimeOut];
+    if (timeOutConf > 0) {
+        timeOut = timeOutConf;
+    }
     NSURL *nsUrl = [NSURL URLWithString : url];
     // url转化为一个请求
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL : nsUrl cachePolicy : NSURLRequestReloadIgnoringLocalCacheData timeoutInterval : 15];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL : nsUrl cachePolicy : NSURLRequestReloadIgnoringLocalCacheData timeoutInterval : timeOut];
     // 设置请求方法
     [request setHTTPMethod : @"POST"];
     //设置要发送的正文内容（适用于Post请求）

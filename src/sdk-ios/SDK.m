@@ -16,7 +16,8 @@
 #import "General.h"
 
 @implementation SDK
-
+static NSString *_url = nil;
+static SDKConfigure *_sdkConfigure = nil;
 static SDK *_sdk = nil;
 
 + (instancetype) sharedInstance {
@@ -33,10 +34,29 @@ static SDK *_sdk = nil;
     return [SDK sharedInstance] ;
 }
 - (instancetype) setUrl : (NSString *) url {
-    [[General sharedInstance] setUrl : url];
+    _url = url;
     return self;
 }
-
++ (NSString *) getUrl {
+    return _url;
+}
+- (instancetype) setConfigure : (SDKConfigure *) sdkConfigure {
+    if ([Tools isEmpty: _sdkConfigure]) {
+        _sdkConfigure = [SDKConfigure new];
+    }
+    int64_t chainId = [sdkConfigure getChainId];
+    if (chainId > 0) {
+        [_sdkConfigure setChainId: chainId];
+    }
+    int64_t timeOut = [sdkConfigure getTimeOut];
+    if (timeOut > 0) {
+        [_sdkConfigure setTimeOut: timeOut];
+    }
+    return self;
+}
++ (SDKConfigure *) getConfigure {
+    return _sdkConfigure;
+}
 - (AccountService *) getAccountService {
     return [AccountServiceImpl new];
 }

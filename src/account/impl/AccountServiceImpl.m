@@ -13,7 +13,7 @@
 #import "Http.h"
 #import "SDKError.h"
 #import "SDKException.h"
-#import "YYModel.h"
+#import "YYModelClass.h"
 
 @implementation AccountServiceImpl
 
@@ -41,7 +41,7 @@
         [accountCheckValidResponse buildResponse:(SUCCESS) : accountCheckValidResult];
     }
     @catch(SDKException *sdkException) {
-        [accountCheckValidResponse buildResponse: ([sdkException getErrorCode]) : accountCheckValidResult];
+        [accountCheckValidResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  : accountCheckValidResult];
     }
     return accountCheckValidResponse;
 }
@@ -120,10 +120,10 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [accountGetInfoResponse buildResponse: ([sdkException getErrorCode]) :(accountGetInfoResult)];
+        [accountGetInfoResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] : (accountGetInfoResult)];
     }
     @catch(NSException *exception) {
-        [accountGetInfoResponse buildResponse: (SYSTEM_ERROR) :(accountGetInfoResult)];
+        [accountGetInfoResponse buildResponse: (SYSTEM_ERROR) : [exception reason] :(accountGetInfoResult)];
     }
     return accountGetInfoResponse;
 }
@@ -157,9 +157,17 @@
         NSString *url = [[General sharedInstance] accountGetInfoUrl: address];
         NSData *result = [Http get : url];
         accountGetNonceResponse = [AccountGetNonceResponse yy_modelWithJSON : result];
+        int32_t errorCode = accountGetNonceResponse.errorCode;
+        if (errorCode == 4) {
+            @throw [[SDKException alloc] initWithCodeAndDesc : errorCode : [NSString stringWithFormat : @"Account (%@) doest not exist",address]];
+        }
+        if (errorCode != 0) {
+            NSString *errorDesc = accountGetNonceResponse.errorDesc;
+            @throw [[SDKException alloc] initWithCodeAndDesc : errorCode : ([Tools isEmpty : errorDesc] ? @"error" : errorDesc)];
+        }
     }
     @catch(SDKException *sdkException) {
-        [accountGetNonceResponse buildResponse: ([sdkException getErrorCode]) :(accountGetNonceResult)];
+        [accountGetNonceResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(accountGetNonceResult)];
     }
     return accountGetNonceResponse;
 }
@@ -193,9 +201,21 @@
         NSString *url = [[General sharedInstance] accountGetInfoUrl: address];
         NSData *result = [Http get : url];
         accountGetBalanceResponse = [AccountGetBalanceResponse yy_modelWithJSON : result];
+        int32_t errorCode = accountGetBalanceResponse.errorCode;
+        if (errorCode == 4) {
+            @throw [[SDKException alloc] initWithCodeAndDesc : errorCode : [NSString stringWithFormat : @"Account (%@) doest not exist",address]];
+        }
+        if (errorCode != 0) {
+            NSString *errorDesc = accountGetBalanceResponse.errorDesc;
+            @throw [[SDKException alloc] initWithCodeAndDesc : errorCode : ([Tools isEmpty : errorDesc] ? @"error" : errorDesc)];
+        }
+        if ([Tools isEmpty: accountGetBalanceResponse.result]) {
+            accountGetBalanceResult.balance = 0;
+            [accountGetBalanceResponse buildResponse: SUCCESS : accountGetBalanceResult];
+        }
     }
     @catch(SDKException *sdkException) {
-        [accountGetBalanceResponse buildResponse: ([sdkException getErrorCode]) :(accountGetBalanceResult)];
+        [accountGetBalanceResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(accountGetBalanceResult)];
     }
     return accountGetBalanceResponse;
 }
@@ -224,7 +244,7 @@
         }
         NSString *address = [accountGetAssetsRequest getAddress];
         if (![Tools isAddressValid : address]) {
-            
+            @throw [[SDKException alloc] initWithCode : INVALID_ADDRESS_ERROR];
         }
         General *general = [General sharedInstance];
         if ([Tools isEmpty : [general getUrl]]) {
@@ -247,7 +267,7 @@
         }
     }
     @catch(SDKException *sdkException) {
-        [accountGetAssetsResponse buildResponse: ([sdkException getErrorCode]) :(accountGetAssetsResult)];
+        [accountGetAssetsResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(accountGetAssetsResult)];
     }
     return accountGetAssetsResponse;
 }
@@ -292,9 +312,12 @@
         if (errorCode == 4) {
             @throw [[SDKException alloc] initWithCodeAndDesc : errorCode : [NSString stringWithFormat : @"Account (%@) doest not exist",address]];
         }
+        if ([Tools isEmpty: accountGetMetadataResponse.result.metadatas]) {
+            @throw [[SDKException alloc] initWithCode : NO_METADATA_ERROR];
+        }
     }
     @catch(SDKException *sdkException) {
-        [accountGetMetadataResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc]  :(accountGetMetadataResult)];
+        [accountGetMetadataResponse buildResponse: ([sdkException getErrorCode]) : [sdkException getErrorDesc] :(accountGetMetadataResult)];
     }
     return accountGetMetadataResponse;
 }
@@ -452,8 +475,8 @@
             @throw [[SDKException alloc] initWithCode : SYSTEM_ERROR];
         }
         UInt64 thrshold = strtoull([txThreshold UTF8String], NULL, 0);
-        if (!isNumber || thrshold > INT64_MAX) {
-            @throw [[SDKException alloc] initWithCode : INVALID_MASTERWEIGHT_ERROR];
+        if (!isNumber || thrshold > INT64_MAX || thrshold < 0) {
+            @throw [[SDKException alloc] initWithCode : INVALID_TX_THRESHOLD_ERROR];
         }
     }
     NSString *metadata = [accountSetPrivilegeOperation getMetadata];
